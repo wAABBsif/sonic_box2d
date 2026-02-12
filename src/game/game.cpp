@@ -1,40 +1,41 @@
 #include "game.hpp"
 #include "core/log.hpp"
+#include "core/sdl_interface.hpp"
 
-static void init();
-static void update();
-static void terminate();
-static bool is_running();
+static void s_init();
+static void s_update();
+static void s_terminate();
+static bool s_is_running();
 
 void sb2d::game::run()
 {
-    init();
+    s_init();
     LOG_MESSAGE("Game initialized");
-    while (is_running())
+    while (s_is_running())
     {
-        update();
+        s_update();
     }
 
-    terminate();
+    s_terminate();
     LOG_MESSAGE("Game terminated");
 }
 
-static void init()
+static void s_init()
 {
-
+    sb2d::sdl_interface::init();
 }
 
-static void update()
+static void s_update()
 {
-
+    sb2d::sdl_interface::handle_events();
 }
 
-static void terminate()
+static void s_terminate()
 {
-
+    sb2d::sdl_interface::terminate();
 }
 
-static bool is_running()
+static bool s_is_running()
 {
-    return false;
+    return sb2d::sdl_interface::ready_to_quit();
 }

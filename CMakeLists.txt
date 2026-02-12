@@ -29,8 +29,12 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 endif ()
 
 add_executable(${PROJECT_NAME} src/main.cpp
+    src/game/game.hpp
     src/game/game.cpp
+    src/core/log.hpp
     src/core/log.cpp
+    src/core/sdl_interface.hpp
+    src/core/sdl_interface.cpp
     ${IMGUI_FILES}
 )
 
