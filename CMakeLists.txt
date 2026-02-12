@@ -29,6 +29,7 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 endif ()
 
 add_executable(${PROJECT_NAME} src/main.cpp
+    src/core/log.cpp
     ${IMGUI_FILES}
 )
 

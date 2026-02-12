@@ -1,5 +1,7 @@
 #include <iostream>
+#include <ostream>
+#include "core/log.hpp"
 
 int main() {
-    std::cout << "Hello World!" << std::endl
+    LOG_MESSAGE("Hello World!");
 }
