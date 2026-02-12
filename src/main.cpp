@@ -1,7 +1,6 @@
-#include <iostream>
-#include <ostream>
-#include "core/log.hpp"
+#include "game/game.hpp"
 
-int main() {
-    LOG_MESSAGE("Hello World!");
+int main()
+{
+    sb2d::game::run();
 }
