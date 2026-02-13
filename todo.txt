@@ -1,0 +1,19 @@
+implement timing
+imgui basics
+implement gameobjects
+implement components
+implement systems
+
+implement camera
+implement textures
+implement sprites
+
+implement audio
+implement music
+implement sounds
+
+implement input
+implement keyboard input
+implement gamepad input
+
+implement physics (to be expanded)
