@@ -35,6 +35,8 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/core/log.cpp
     src/core/sdl_interface.hpp
     src/core/sdl_interface.cpp
+    src/gfx/gfx.hpp
+    src/gfx/gfx.cpp
     ${IMGUI_FILES}
 )
 

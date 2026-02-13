@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "core/log.hpp"
 #include "core/sdl_interface.hpp"
+#include "gfx/gfx.hpp"
 
 static void s_init();
 static void s_update();
@@ -23,19 +24,22 @@ void sb2d::game::run()
 static void s_init()
 {
     sb2d::sdl_interface::init();
+    sb2d::gfx::init();
 }
 
 static void s_update()
 {
     sb2d::sdl_interface::handle_events();
+    sb2d::gfx::draw();
 }
 
 static void s_terminate()
 {
     sb2d::sdl_interface::terminate();
+    sb2d::gfx::terminate();
 }
 
 static bool s_is_running()
 {
-    return sb2d::sdl_interface::ready_to_quit();
+    return !sb2d::sdl_interface::ready_to_quit();
 }
