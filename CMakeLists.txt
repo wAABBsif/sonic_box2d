@@ -43,6 +43,8 @@ set(PROJECT_FILES src/main.cpp
     src/core/scoped_timer.cpp
     src/debug/debug_ui.hpp
     src/debug/debug_ui.cpp
+    src/debug/stats_window.cpp
+    src/debug/stats_window.hpp
 )
 
 add_executable(${PROJECT_NAME}

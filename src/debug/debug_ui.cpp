@@ -4,6 +4,7 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "gfx/gfx.hpp"
+#include "stats_window.hpp"
 
 #if defined (IS_DEBUG)
 constexpr ImGuiConfigFlags CONFIG_FLAGS = 
@@ -50,7 +51,7 @@ void sb2d::debug_ui::update()
         return;
 
     //this is temporary obviously
-    ImGui::ShowDemoWindow();
+    sb2d::debug_ui::stats_window::update();
 #endif
 }
 

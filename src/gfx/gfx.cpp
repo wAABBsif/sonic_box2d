@@ -1,7 +1,6 @@
 #include "gfx.hpp"
 #include "SDL3/SDL_video.h"
 #include "core/log.hpp"
-#include "SDL3/SDL.h"
 #include <GLES2/gl2.h>
 
 #include "imgui/backends/imgui_impl_sdl3.h"
