@@ -28,7 +28,7 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 	)
 endif ()
 
-add_executable(${PROJECT_NAME} src/main.cpp
+set(PROJECT_FILES src/main.cpp
     src/game/game.hpp
     src/game/game.cpp
     src/core/log.hpp
@@ -41,6 +41,11 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/core/time.cpp
     src/core/scoped_timer.hpp
     src/core/scoped_timer.cpp
+)
+
+
+add_executable(${PROJECT_NAME}
+    ${PROJECT_FILES}
     ${IMGUI_FILES}
 )
 
