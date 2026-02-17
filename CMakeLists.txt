@@ -39,6 +39,8 @@ add_executable(${PROJECT_NAME} src/main.cpp
     src/gfx/gfx.cpp
     src/core/time.hpp
     src/core/time.cpp
+    src/core/scoped_timer.hpp
+    src/core/scoped_timer.cpp
     ${IMGUI_FILES}
 )
 
