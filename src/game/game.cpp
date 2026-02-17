@@ -24,6 +24,12 @@ void sb2d::game::run()
 
 static void s_init()
 {
+#if defined (IS_DEBUG)
+    LOG_MESSAGE("Build mode: Debug");
+#else
+    LOG_MESSAGE("Build mode: Release");
+#endif
+
     sb2d::sdl_interface::init();
     sb2d::time::init();
     sb2d::gfx::init();
