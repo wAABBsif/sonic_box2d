@@ -6,4 +6,5 @@ namespace sb2d::gfx
     void terminate();
 
     void draw();
+    void init_imgui();
 }

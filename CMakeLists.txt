@@ -41,8 +41,9 @@ set(PROJECT_FILES src/main.cpp
     src/core/time.cpp
     src/core/scoped_timer.hpp
     src/core/scoped_timer.cpp
+    src/debug/debug_ui.hpp
+    src/debug/debug_ui.cpp
 )
-
 
 add_executable(${PROJECT_NAME}
     ${PROJECT_FILES}

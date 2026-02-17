@@ -2,7 +2,7 @@
 #include "SDL3/SDL_events.h"
 #include "SDL3/SDL_init.h"
 #include "core/log.hpp"
-#include <cstdlib>
+#include "debug/debug_ui.hpp"
 
 constexpr SDL_InitFlags INIT_FLAGS = 
 {
@@ -46,5 +46,7 @@ void sb2d::sdl_interface::handle_events()
     {
         if (event.type == SDL_EVENT_QUIT)
             s_is_ready_to_quit = true;
+
+        sb2d::debug_ui::handle_events(&event);
     }
 }
