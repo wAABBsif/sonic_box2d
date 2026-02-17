@@ -1,14 +1,17 @@
 #include "log.hpp"
+#if defined(WIN32)
+#include <windows.h>
+#endif
 
 void sb2d::log_set_color(log_color color)
 {
 #if defined(WIN32)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    if (color == LOG_COLOR_WHITE)
+    if (color == log_color::WHITE)
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-    else if (color == LOG_COLOR_YELLOW)
+    else if (color == log_color::YELLOW)
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN);
-    else if (color == LOG_COLOR_RED)
+    else if (color == log_color::RED)
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 #elif defined(linux)
     if (color == log_color::WHITE)

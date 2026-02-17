@@ -2,3 +2,4 @@ imgui.ini
 .cache
 bin
 compile_commands.json
+/.idea
