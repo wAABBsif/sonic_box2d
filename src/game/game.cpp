@@ -3,6 +3,7 @@
 #include "core/sdl_interface.hpp"
 #include "core/time.hpp"
 #include "debug/debug_ui.hpp"
+#include "game/game_object.hpp"
 #include "gfx/gfx.hpp"
 
 static void s_init();
@@ -35,6 +36,7 @@ static void s_init()
     sb2d::time::init();
     sb2d::gfx::init();
     sb2d::debug_ui::init();
+    sb2d::game::game_object::init();
 }
 
 static void s_update()
@@ -42,6 +44,7 @@ static void s_update()
     sb2d::time::update();
     sb2d::sdl_interface::handle_events();
 
+    sb2d::game::game_object::update();
     sb2d::debug_ui::update();
 
     sb2d::gfx::draw();
@@ -49,6 +52,7 @@ static void s_update()
 
 static void s_terminate()
 {
+    sb2d::game::game_object::terminate();
     sb2d::debug_ui::terminate();
     sb2d::sdl_interface::terminate();
     sb2d::gfx::terminate();
