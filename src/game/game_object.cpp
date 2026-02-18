@@ -37,7 +37,12 @@ sb2d::game::game_object& sb2d::game::game_object::create(std::string name, obj_t
     return *s_game_objects.emplace_back(std::make_unique<sb2d::game::game_object>(name, tags));
 }
 
-std::vector<std::unique_ptr<sb2d::game::game_object>>& sb2d::game::game_object::get()
+size_t sb2d::game::game_object::get_count()
+{
+    return s_game_objects.size();
+}
+
+std::vector<std::unique_ptr<sb2d::game::game_object>>& sb2d::game::game_object::get_all()
 {
     return s_game_objects;
 }

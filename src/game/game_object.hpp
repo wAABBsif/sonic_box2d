@@ -21,7 +21,9 @@ namespace sb2d::game
 
         game_object(std::string name = "", obj_tag tags = NONE);
         static game_object& create(std::string name = "", obj_tag tags = NONE);
-        static std::vector<std::unique_ptr<game_object>>& get();
+
+        static size_t get_count();
+        static std::vector<std::unique_ptr<game_object>>& get_all();
          
     public:
         std::string name;
