@@ -30,5 +30,7 @@ void sb2d::debug_ui::stats_window::update()
 
 static void s_refresh_stats()
 {
+#if defined (IS_DEBUG)
     s_frametime = sb2d::time::get_delta();
+#endif
 }

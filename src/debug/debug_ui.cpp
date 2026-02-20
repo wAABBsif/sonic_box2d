@@ -68,9 +68,11 @@ void sb2d::debug_ui::draw()
 
 void sb2d::debug_ui::handle_events(const SDL_Event *event)
 {
+#if defined (IS_DEBUG)
     ImGui_ImplSDL3_ProcessEvent(event);
 
 	if (event->type == SDL_EVENT_KEY_DOWN)
 		if (event->key.key == SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F1))
 			s_is_enabled = !s_is_enabled;
+#endif
 }
