@@ -45,10 +45,10 @@ set(PROJECT_FILES src/main.cpp
     src/debug/debug_ui.cpp
     src/debug/stats_window.hpp
     src/debug/stats_window.cpp
-    src/game/game_object.hpp
-    src/game/game_object.cpp
-    src/debug/objects_window.hpp
-    src/debug/objects_window.cpp
+    src/game/entity.hpp
+    src/game/entity.cpp
+    src/debug/entities_window.hpp
+    src/debug/entities_window.cpp
 )
 
 add_executable(${PROJECT_NAME}

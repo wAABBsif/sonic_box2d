@@ -6,7 +6,7 @@
 #include "gfx/gfx.hpp"
 
 #include "stats_window.hpp"
-#include "objects_window.hpp"
+#include "entities_window.hpp"
 
 #if defined (IS_DEBUG)
 constexpr ImGuiConfigFlags CONFIG_FLAGS = 
@@ -54,7 +54,7 @@ void sb2d::debug_ui::update()
 
     //this is temporary obviously
     sb2d::debug_ui::stats_window::update();
-    sb2d::debug_ui::objects_window::update();
+    sb2d::debug_ui::entities_window::update();
 #endif
 }
 
