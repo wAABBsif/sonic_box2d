@@ -48,7 +48,7 @@ std::vector<std::shared_ptr<sb2d::game::entity>>& sb2d::game::entity::get_all()
 }
 
 sb2d::game::entity::entity(std::string name, tag tags)
-    : name(name), tags(tags)
+    : name(name), tags(tags), components(std::vector<std::shared_ptr<component>>())
 {}
 
 void sb2d::game::entity::set_tag(tag t, bool value)

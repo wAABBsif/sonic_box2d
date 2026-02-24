@@ -1,4 +1,5 @@
 #pragma once
+#include "component.hpp"
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -31,6 +32,8 @@ namespace sb2d::game
         tag tags;
         
     public:
+        std::vector<std::shared_ptr<sb2d::game::component>> components;
+
         void set_tag(tag t, bool value);
         bool get_tag(tag t);
 
