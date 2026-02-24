@@ -21,7 +21,7 @@ namespace sb2d::game
         static void update();
 
         entity(std::string name = "", tag tags = NONE);
-        static entity& create(std::string name = "", tag tags = NONE);
+        static std::weak_ptr<entity> create(std::string name = "", tag tags = NONE);
 
         static size_t get_count();
         static std::vector<std::shared_ptr<entity>>& get_all();
@@ -32,7 +32,7 @@ namespace sb2d::game
         tag tags;
         
     public:
-        std::vector<std::shared_ptr<sb2d::game::component>> components;
+        std::vector<std::shared_ptr<component>> components;
 
         void set_tag(tag t, bool value);
         bool get_tag(tag t);

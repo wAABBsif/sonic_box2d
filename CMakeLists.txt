@@ -51,6 +51,8 @@ set(PROJECT_FILES src/main.cpp
     src/debug/entities_window.cpp
     src/game/component.hpp
     src/game/component.cpp
+    src/game/components/transform.hpp
+    src/game/components/transform.cpp
 )
 
 add_executable(${PROJECT_NAME}

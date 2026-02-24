@@ -32,9 +32,9 @@ void sb2d::game::entity::update()
     }
 }
 
-sb2d::game::entity& sb2d::game::entity::create(std::string name, tag tags)
+std::weak_ptr<sb2d::game::entity> sb2d::game::entity::create(std::string name, tag tags)
 {
-    return *s_entities.emplace_back(std::make_unique<sb2d::game::entity>(name, tags));
+    return s_entities.emplace_back(std::make_shared<sb2d::game::entity>(name, tags));
 }
 
 size_t sb2d::game::entity::get_count()
