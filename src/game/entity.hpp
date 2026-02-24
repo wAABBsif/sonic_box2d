@@ -23,7 +23,7 @@ namespace sb2d::game
         static entity& create(std::string name = "", tag tags = NONE);
 
         static size_t get_count();
-        static std::vector<std::unique_ptr<entity>>& get_all();
+        static std::vector<std::shared_ptr<entity>>& get_all();
          
     public:
         std::string name;

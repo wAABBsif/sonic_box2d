@@ -6,7 +6,7 @@
 
 constexpr size_t GAME_OBJECT_ALLOCATION_SIZE = 64;
 
-static std::vector<std::unique_ptr<sb2d::game::entity>> s_entities;
+static std::vector<std::shared_ptr<sb2d::game::entity>> s_entities;
 
 void sb2d::game::entity::init()
 {
@@ -42,7 +42,7 @@ size_t sb2d::game::entity::get_count()
     return s_entities.size();
 }
 
-std::vector<std::unique_ptr<sb2d::game::entity>>& sb2d::game::entity::get_all()
+std::vector<std::shared_ptr<sb2d::game::entity>>& sb2d::game::entity::get_all()
 {
     return s_entities;
 }
