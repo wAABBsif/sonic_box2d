@@ -1,8 +1,11 @@
 implement systems
 
-implement camera
-implement textures
+implement rendering system
 implement sprites
+implement camera
+
+implement asset system
+implement textures
 
 implement audio
 implement music
