@@ -1,6 +1,8 @@
 #include "transform.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/ext/vector_float3.hpp"
+#include "imgui.h"
+#include <memory>
 
 sb2d::game::components::transform::transform(glm::vec2 position, float rotation, glm::vec2 scale)
     : position(position), rotation(rotation), scale(scale)
@@ -9,6 +11,13 @@ sb2d::game::components::transform::transform(glm::vec2 position, float rotation,
 constexpr std::string sb2d::game::components::transform::get_name()
 {
     return "Transform";
+}
+
+void sb2d::game::components::transform::update_debug_inspector()
+{
+    ImGui::DragFloat2("Position", reinterpret_cast<float*>(&this->position), 0.1f);
+    ImGui::DragFloat("Rotation", &this->rotation, 0.01f);
+    ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&this->scale), 0.01f);
 }
 
 glm::mat4 sb2d::game::components::transform::local_to_world()

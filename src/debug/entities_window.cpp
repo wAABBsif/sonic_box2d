@@ -5,7 +5,7 @@
 #include <memory>
 
 #if defined (IS_DEBUG)
-static sb2d::game::entity* selected_entity;
+static std::weak_ptr<sb2d::game::entity> selected_entity;
 #endif
 
 void sb2d::debug_ui::entities_window::update()
@@ -15,11 +15,16 @@ void sb2d::debug_ui::entities_window::update()
     ImGui::BeginListBox("##Entities", ImGui::GetContentRegionAvail());
     for (auto& obj : game::entity::get_all())
     {
-        bool selected = ImGui::Selectable(obj->name.c_str(), selected_entity == obj.get());
+        bool selected = ImGui::Selectable(obj->name.c_str(), selected_entity.lock() == obj);
         if (selected)
-            selected_entity = obj.get();
+            selected_entity = obj;
     }
     ImGui::EndListBox();
     ImGui::End();
 #endif
+}
+
+std::weak_ptr<sb2d::game::entity> sb2d::debug_ui::entities_window::get_selection()
+{
+    return selected_entity;
 }

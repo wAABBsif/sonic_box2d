@@ -1,4 +1,3 @@
-implement components
 implement systems
 
 implement camera

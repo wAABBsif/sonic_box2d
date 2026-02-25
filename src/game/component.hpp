@@ -7,5 +7,6 @@ namespace sb2d::game
     {
     public:
         virtual constexpr std::string get_name() = 0;
+        virtual void update_debug_inspector() = 0;
     };
 }
