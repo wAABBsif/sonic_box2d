@@ -18,7 +18,7 @@ namespace sb2d::game::components
         constexpr std::string get_name() override;
         void update_debug_inspector() override;
 
-        glm::mat4 local_to_world();
-        glm::mat4 world_to_local();
+        glm::mat3 local_to_world();
+        glm::mat3 world_to_local();
     };
 }
