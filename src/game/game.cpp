@@ -6,12 +6,14 @@
 #include "game/entity.hpp"
 #include "gfx/gfx.hpp"
 
+using namespace sb2d;
+
 static void s_init();
 static void s_update();
 static void s_terminate();
 static bool s_is_running();
 
-void sb2d::game::run()
+void game::run()
 {
     s_init();
     LOG_MESSAGE("Game initialized");
@@ -32,33 +34,33 @@ static void s_init()
     LOG_MESSAGE("Build mode: Release");
 #endif
 
-    sb2d::sdl_interface::init();
-    sb2d::time::init();
-    sb2d::gfx::init();
-    sb2d::debug_ui::init();
-    sb2d::game::entity::init();
+    sdl_interface::init();
+    time::init();
+    gfx::init();
+    debug_ui::init();
+    game::entity::init();
 }
 
 static void s_update()
 {
-    sb2d::time::update();
-    sb2d::sdl_interface::handle_events();
+    time::update();
+    sdl_interface::handle_events();
 
-    sb2d::game::entity::update();
-    sb2d::debug_ui::update();
+    game::entity::update();
+    debug_ui::update();
 
-    sb2d::gfx::draw();
+    gfx::draw();
 }
 
 static void s_terminate()
 {
-    sb2d::game::entity::terminate();
-    sb2d::debug_ui::terminate();
-    sb2d::sdl_interface::terminate();
-    sb2d::gfx::terminate();
+    game::entity::terminate();
+    debug_ui::terminate();
+    sdl_interface::terminate();
+    gfx::terminate();
 }
 
 static bool s_is_running()
 {
-    return !sb2d::sdl_interface::ready_to_quit();
+    return !sdl_interface::ready_to_quit();
 }

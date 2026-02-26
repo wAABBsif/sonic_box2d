@@ -9,6 +9,8 @@
 #include "entities_window.hpp"
 #include "components_window.hpp"
 
+using namespace sb2d;
+
 #if defined (IS_DEBUG)
 constexpr ImGuiConfigFlags CONFIG_FLAGS = 
 {
@@ -19,7 +21,7 @@ constexpr ImGuiConfigFlags CONFIG_FLAGS =
 
 static bool s_is_enabled;
 
-void sb2d::debug_ui::init()
+void debug_ui::init()
 {
 #if defined (IS_DEBUG)
     ImGui::CreateContext();
@@ -28,12 +30,12 @@ void sb2d::debug_ui::init()
 
     ImGui::StyleColorsDark();
 
-    sb2d::gfx::init_imgui();
+    gfx::init_imgui();
     ImGui_ImplOpenGL3_Init();
 #endif
 }
 
-void sb2d::debug_ui::terminate()
+void debug_ui::terminate()
 {
 #if defined (IS_DEBUG)
     ImGui_ImplOpenGL3_Shutdown();
@@ -42,7 +44,7 @@ void sb2d::debug_ui::terminate()
 #endif
 }
 
-void sb2d::debug_ui::update()
+void debug_ui::update()
 {
 #if defined (IS_DEBUG)
     ImGui_ImplOpenGL3_NewFrame();
@@ -54,13 +56,13 @@ void sb2d::debug_ui::update()
         return;
 
     //this is temporary obviously
-    sb2d::debug_ui::stats_window::update();
-    sb2d::debug_ui::entities_window::update();
-    sb2d::debug_ui::components_window::update();
+    stats_window::update();
+    entities_window::update();
+    components_window::update();
 #endif
 }
 
-void sb2d::debug_ui::draw()
+void debug_ui::draw()
 {
 #if defined (IS_DEBUG)
     ImGui::Render();
@@ -68,7 +70,7 @@ void sb2d::debug_ui::draw()
 #endif
 }
 
-void sb2d::debug_ui::handle_events(const SDL_Event *event)
+void debug_ui::handle_events(const SDL_Event *event)
 {
 #if defined (IS_DEBUG)
     ImGui_ImplSDL3_ProcessEvent(event);

@@ -5,7 +5,10 @@
 #include "imgui.h"
 #include <memory>
 
-void sb2d::debug_ui::components_window::update()
+using namespace sb2d::game;
+using namespace sb2d::debug_ui;
+
+void components_window::update()
 {
 #if defined (IS_DEBUG)
     ImGui::Begin("Components");

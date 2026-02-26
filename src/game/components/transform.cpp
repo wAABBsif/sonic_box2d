@@ -6,6 +6,8 @@
 #include <memory>
 #include "core/transformations.hpp"
 
+using namespace sb2d::game;
+
 sb2d::game::components::transform::transform(glm::vec2 position, float rotation, glm::vec2 scale)
     : position(position), rotation(rotation), scale(scale)
 {}

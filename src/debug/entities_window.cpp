@@ -4,11 +4,14 @@
 #include "imgui.h"
 #include <memory>
 
+using namespace sb2d::game;
+using namespace sb2d::debug_ui;
+
 #if defined (IS_DEBUG)
 static std::weak_ptr<sb2d::game::entity> selected_entity;
 #endif
 
-void sb2d::debug_ui::entities_window::update()
+void entities_window::update()
 {
 #if defined (IS_DEBUG)
     ImGui::Begin("Entities");
@@ -24,7 +27,7 @@ void sb2d::debug_ui::entities_window::update()
 #endif
 }
 
-std::weak_ptr<sb2d::game::entity> sb2d::debug_ui::entities_window::get_selection()
+std::weak_ptr<entity> entities_window::get_selection()
 {
     return selected_entity;
 }

@@ -2,6 +2,9 @@
 #include "core/time.hpp"
 #include "imgui.h"
 
+using namespace sb2d;
+using namespace sb2d::debug_ui;
+
 #if defined (IS_DEBUG)
 constexpr float TIME_BETWEEN_REFRESHES = 0.1f;
 static float s_refresh_timer;
@@ -11,7 +14,7 @@ static float s_frametime;
 
 static void s_refresh_stats();
 
-void sb2d::debug_ui::stats_window::update()
+void stats_window::update()
 {
 #if defined (IS_DEBUG)
     s_refresh_timer -= time::get_delta();
@@ -31,6 +34,6 @@ void sb2d::debug_ui::stats_window::update()
 static void s_refresh_stats()
 {
 #if defined (IS_DEBUG)
-    s_frametime = sb2d::time::get_delta();
+    s_frametime = time::get_delta();
 #endif
 }

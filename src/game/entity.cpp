@@ -4,23 +4,25 @@
 #include <memory>
 #include <vector>
 
+using namespace sb2d::game;
+
 constexpr size_t GAME_OBJECT_ALLOCATION_SIZE = 64;
 
-static std::vector<std::shared_ptr<sb2d::game::entity>> s_entities;
+static std::vector<std::shared_ptr<entity>> s_entities;
 
-void sb2d::game::entity::init()
+void entity::init()
 {
     s_entities.reserve(GAME_OBJECT_ALLOCATION_SIZE);
     LOG_MESSAGE("Initialized entities");
 }
 
-void sb2d::game::entity::terminate()
+void entity::terminate()
 {
     s_entities.clear();
     LOG_MESSAGE("Terminated entities");
 }
 
-void sb2d::game::entity::update()
+void entity::update()
 {
     for (auto it = s_entities.begin(); it != s_entities.end(); it++)
     {
@@ -32,26 +34,26 @@ void sb2d::game::entity::update()
     }
 }
 
-std::weak_ptr<sb2d::game::entity> sb2d::game::entity::create(std::string name, tag tags)
+std::weak_ptr<entity> entity::create(std::string name, tag tags)
 {
-    return s_entities.emplace_back(std::make_shared<sb2d::game::entity>(name, tags));
+    return s_entities.emplace_back(std::make_shared<entity>(name, tags));
 }
 
-size_t sb2d::game::entity::get_count()
+size_t entity::get_count()
 {
     return s_entities.size();
 }
 
-std::vector<std::shared_ptr<sb2d::game::entity>>& sb2d::game::entity::get_all()
+std::vector<std::shared_ptr<entity>>& entity::get_all()
 {
     return s_entities;
 }
 
-sb2d::game::entity::entity(std::string name, tag tags)
+entity::entity(std::string name, tag tags)
     : name(name), tags(tags), components(std::vector<std::shared_ptr<component>>())
 {}
 
-void sb2d::game::entity::set_tag(tag t, bool value)
+void entity::set_tag(tag t, bool value)
 {
     if (value)
         this->tags = (tag)(this->tags | t);
@@ -59,12 +61,12 @@ void sb2d::game::entity::set_tag(tag t, bool value)
         this->tags = (tag)(this->tags & ~t);
 }
 
-bool sb2d::game::entity::get_tag(tag t)
+bool entity::get_tag(tag t)
 {
     return this->tags & t;
 }
 
-void sb2d::game::entity::queue_deletion()
+void entity::queue_deletion()
 {
-    sb2d::game::entity::set_tag(QUEUE_DELETION, true);
+    entity::set_tag(QUEUE_DELETION, true);
 }

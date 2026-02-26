@@ -3,6 +3,8 @@
 #include <windows.h>
 #endif
 
+using namespace sb2d;
+
 void sb2d::log_set_color(log_color color)
 {
 #if defined(WIN32)

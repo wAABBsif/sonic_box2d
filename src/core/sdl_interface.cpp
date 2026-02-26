@@ -4,6 +4,8 @@
 #include "core/log.hpp"
 #include "debug/debug_ui.hpp"
 
+using namespace sb2d;
+
 constexpr SDL_InitFlags INIT_FLAGS = 
 {
     SDL_INIT_EVENTS
@@ -14,7 +16,7 @@ constexpr SDL_InitFlags INIT_FLAGS =
 
 static bool s_is_ready_to_quit;
 
-void sb2d::sdl_interface::init()
+void sdl_interface::init()
 {
     if (!SDL_Init(INIT_FLAGS))
     {
@@ -27,19 +29,19 @@ void sb2d::sdl_interface::init()
     LOG_MESSAGE("Initialized SDL");
 }
 
-void sb2d::sdl_interface::terminate()
+void sdl_interface::terminate()
 {
     SDL_Quit();
 
     LOG_MESSAGE("Terminated SDL");
 }
 
-bool sb2d::sdl_interface::ready_to_quit()
+bool sdl_interface::ready_to_quit()
 {
     return s_is_ready_to_quit;
 }
 
-void sb2d::sdl_interface::handle_events()
+void sdl_interface::handle_events()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -47,6 +49,6 @@ void sb2d::sdl_interface::handle_events()
         if (event.type == SDL_EVENT_QUIT)
             s_is_ready_to_quit = true;
 
-        sb2d::debug_ui::handle_events(&event);
+        debug_ui::handle_events(&event);
     }
 }

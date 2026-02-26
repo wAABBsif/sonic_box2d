@@ -1,23 +1,26 @@
 #include "transformations.hpp"
 #include "glm/fwd.hpp"
 
-glm::mat3 sb2d::transformations::translate(glm::mat3 mat, glm::vec2 translation)
+using namespace sb2d;
+using namespace glm;
+
+mat3 transformations::translate(mat3 mat, vec2 translation)
 {
-    glm::mat3 t = glm::mat3(1, 0, 0, 0, 1, 0, translation.x, translation.y, 1);
+    mat3 t = mat3(1, 0, 0, 0, 1, 0, translation.x, translation.y, 1);
     return mat * t;
 }
 
-glm::mat3 sb2d::transformations::rotate(glm::mat3 mat, float rotation)
+mat3 transformations::rotate(mat3 mat, float rotation)
 {
     const float s = sinf(rotation);
     const float c = cosf(rotation);
 
-    glm::mat3 t = glm::mat3(c, s, 0, -s, c, 0, 0, 0, 1);
+    mat3 t = mat3(c, s, 0, -s, c, 0, 0, 0, 1);
     return mat * t;
 }
 
-glm::mat3 sb2d::transformations::scale(glm::mat3 mat, glm::vec2 scale)
+mat3 transformations::scale(mat3 mat, vec2 scale)
 {
-    glm::mat3 t = glm::mat3(scale.x, 0, 0, 0, scale.y, 0, 0, 0, 1);
+    mat3 t = mat3(scale.x, 0, 0, 0, scale.y, 0, 0, 0, 1);
     return mat * t;
 }

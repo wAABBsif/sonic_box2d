@@ -6,6 +6,8 @@
 #include "imgui/backends/imgui_impl_sdl3.h"
 #include "debug/debug_ui.hpp"
 
+using namespace sb2d;
+
 constexpr std::string WINDOW_TITLE = "Sonic Box2D";
 constexpr int WINDOW_WIDTH = 640;
 constexpr int WINDOW_HEIGHT = 480;
@@ -18,7 +20,7 @@ constexpr SDL_WindowFlags WINDOW_FLAGS =
 static SDL_Window* s_sdl_window;
 static SDL_GLContext s_sdl_context;
 
-void sb2d::gfx::init()
+void gfx::init()
 {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -33,24 +35,24 @@ void sb2d::gfx::init()
     LOG_MESSAGE("Initialized graphics");
 }
 
-void sb2d::gfx::draw()
+void gfx::draw()
 {
     glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    sb2d::debug_ui::draw();
+    debug_ui::draw();
 
     SDL_GL_SwapWindow(s_sdl_window);
 }
 
-void sb2d::gfx::terminate()
+void gfx::terminate()
 {
     SDL_DestroyWindow(s_sdl_window);
 
     LOG_MESSAGE("Terminated graphics");
 }
 
-void sb2d::gfx::init_imgui()
+void gfx::init_imgui()
 {
 #if defined(IS_DEBUG)
     ImGui_ImplSDL3_InitForOpenGL(s_sdl_window, s_sdl_context);
