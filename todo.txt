@@ -1,9 +1,10 @@
+implement asset system
+
+implement shaders
 implement rendering system
+implement textures
 implement sprites
 implement camera
-
-implement asset system
-implement textures
 
 implement audio
 implement music

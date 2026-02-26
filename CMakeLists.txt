@@ -57,6 +57,8 @@ set(PROJECT_FILES src/main.cpp
     src/debug/components_window.cpp
     src/core/transformations.hpp
     src/core/transformations.cpp
+    src/assets/asset.hpp
+    src/assets/asset.cpp
 )
 
 add_executable(${PROJECT_NAME}
