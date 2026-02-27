@@ -17,13 +17,6 @@ constexpr std::string sb2d::game::components::transform::get_name()
     return "Transform";
 }
 
-void sb2d::game::components::transform::update_debug_inspector()
-{
-    ImGui::DragFloat2("Position", reinterpret_cast<float*>(&this->position), 0.1f);
-    ImGui::DragFloat("Rotation", &this->rotation, 0.01f);
-    ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&this->scale), 0.01f);
-}
-
 glm::mat3 sb2d::game::components::transform::local_to_world()
 {
     glm::mat3 result = glm::identity<glm::mat3>();
@@ -40,4 +33,13 @@ glm::mat3 sb2d::game::components::transform::world_to_local()
     result = transformations::rotate(result, -this->rotation);
     result = transformations::translate(result, -this->position);
     return result;
+}
+
+void sb2d::game::components::transform::update_debug_inspector()
+{
+#if defined (IS_DEBUG)
+    ImGui::DragFloat2("Position", reinterpret_cast<float*>(&this->position), 0.1f);
+    ImGui::DragFloat("Rotation", &this->rotation, 0.01f);
+    ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&this->scale), 0.01f);
+#endif
 }

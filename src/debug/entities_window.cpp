@@ -29,5 +29,9 @@ void entities_window::update()
 
 std::weak_ptr<entity> entities_window::get_selection()
 {
+#if defined (IS_DEBUG)
     return selected_entity;
+#else
+    return nullptr;
+#endif
 }
