@@ -7,9 +7,7 @@
 using namespace sb2d::game;
 using namespace sb2d::debug_ui;
 
-#if defined (IS_DEBUG)
 static std::weak_ptr<sb2d::game::entity> selected_entity;
-#endif
 
 void entities_window::update()
 {
@@ -29,9 +27,5 @@ void entities_window::update()
 
 std::weak_ptr<entity> entities_window::get_selection()
 {
-#if defined (IS_DEBUG)
     return selected_entity;
-#else
-    return nullptr;
-#endif
 }
