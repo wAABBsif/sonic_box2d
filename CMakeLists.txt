@@ -59,6 +59,8 @@ set(PROJECT_FILES src/main.cpp
     src/core/transformations.cpp
     src/assets/asset.hpp
     src/assets/asset.cpp
+    src/assets/shader.hpp
+    src/assets/shader.cpp
 )
 
 add_executable(${PROJECT_NAME}

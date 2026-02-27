@@ -6,26 +6,27 @@ namespace sb2d
 {
     class asset_base
     {
-        asset_base() = delete;
     protected:
+        asset_base() {}
+        virtual ~asset_base() {}
         static void add_to_map(const std::string &path, std::weak_ptr<asset_base> a);
         static std::shared_ptr<asset_base> get_if_exists(const std::string &path);
     };
 
     template <typename derived>
-    class asset : asset_base
+    class asset : public asset_base
     {
-        asset() = delete;
     protected:
-        asset(const std::string &path) = 0;
+        asset() {}
+        virtual ~asset() {}
     public:
-        static std::shared_ptr<asset<derived>> get(const std::string &path)
+        static std::shared_ptr<derived> get(const std::string &path)
         {
-            std::shared_ptr<asset<derived>> result = asset_base::get_if_exists(path);
+            std::shared_ptr<derived> result = std::dynamic_pointer_cast<derived>(asset_base::get_if_exists(path));
             if (result)
                 return result;
-            result = std::make_shared<asset<derived>>(path);
-            add_to_map(path, result);
+            result = std::make_shared<derived>(path);
+            add_to_map(path, std::static_pointer_cast<asset_base>(result));
             return result;
         }
     };
