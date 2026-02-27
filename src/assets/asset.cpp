@@ -6,6 +6,7 @@
 using namespace sb2d;
 
 static std::map<std::string, std::weak_ptr<asset_base>> s_loaded_assets;
+static std::string s_asset_directory;
 
 void asset_base::add_to_map(const std::string &path, std::weak_ptr<asset_base> a)
 {
@@ -25,4 +26,14 @@ std::shared_ptr<asset_base> asset_base::get_if_exists(const std::string &path)
     }
 
     return it->second.lock();
+}
+
+void asset_base::set_asset_directory(const std::string &path)
+{
+    s_asset_directory = path + '/';
+}
+
+const std::string& asset_base::get_asset_directory()
+{
+    return s_asset_directory;
 }

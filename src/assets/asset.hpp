@@ -11,6 +11,9 @@ namespace sb2d
         virtual ~asset_base() {}
         static void add_to_map(const std::string &path, std::weak_ptr<asset_base> a);
         static std::shared_ptr<asset_base> get_if_exists(const std::string &path);
+    public:
+        static void set_asset_directory(const std::string& path);
+        static const std::string& get_asset_directory();
     };
 
     template <typename derived>
@@ -25,7 +28,7 @@ namespace sb2d
             std::shared_ptr<derived> result = std::dynamic_pointer_cast<derived>(asset_base::get_if_exists(path));
             if (result)
                 return result;
-            result = std::make_shared<derived>(path);
+            result = std::make_shared<derived>(get_asset_directory() + path);
             add_to_map(path, std::static_pointer_cast<asset_base>(result));
             return result;
         }
