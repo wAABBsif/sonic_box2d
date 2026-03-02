@@ -1,6 +1,3 @@
-implement asset system
-
-implement shaders
 implement rendering system
 implement textures
 implement sprites

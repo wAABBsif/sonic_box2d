@@ -73,6 +73,7 @@ shader::shader(const std::string &path)
     if (source.vert.empty() || source.frag.empty())
     {
         LOG_WARNING("Shader file '", path, "' could not be loaded");
+        return;
     }
 
     uint32_t vert = s_compile_shader(source.vert.c_str(), GL_VERTEX_SHADER);
@@ -107,7 +108,7 @@ shader::~shader()
     glDeleteProgram(this->program_id);
 }
 
-void shader::set_current(shader& s)
+void shader::set_current(const shader& s)
 {
     glUseProgram(s.program_id);
 }

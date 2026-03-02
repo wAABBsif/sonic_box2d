@@ -11,7 +11,7 @@ namespace sb2d::assets
         shader(const std::string &path);
         ~shader();
 
-        static void set_current(shader& s);
+        static void set_current(const shader& s);
         static void reset_current();
     };
 }
