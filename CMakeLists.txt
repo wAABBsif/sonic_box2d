@@ -28,6 +28,8 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 	)
 endif ()
 
+set(GLAD_FILES lib/GLAD/src/glad.c)
+
 set(PROJECT_FILES src/main.cpp
     src/game/game.hpp
     src/game/game.cpp
@@ -63,10 +65,13 @@ set(PROJECT_FILES src/main.cpp
     src/assets/shader.cpp
     src/assets/texture.hpp
     src/assets/texture.cpp
+    src/gfx/renderer.hpp
+    src/gfx/renderer.cpp
 )
 
 add_executable(${PROJECT_NAME}
     ${PROJECT_FILES}
+    ${GLAD_FILES}
     ${IMGUI_FILES}
 )
 

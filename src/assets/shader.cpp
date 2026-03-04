@@ -112,8 +112,3 @@ void shader::set_current(const shader& s)
 {
     glUseProgram(s.program_id);
 }
-
-void shader::reset_current()
-{
-    glUseProgram(0);
-}

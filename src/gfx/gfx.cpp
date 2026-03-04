@@ -1,8 +1,7 @@
 #include "gfx.hpp"
 #include "SDL3/SDL_video.h"
 #include "core/log.hpp"
-#include "GL/gl.h"
-
+#include "glad/glad.h"
 #include "imgui/backends/imgui_impl_sdl3.h"
 #include "debug/debug_ui.hpp"
 
@@ -29,6 +28,8 @@ void gfx::init()
     s_sdl_window = SDL_CreateWindow(WINDOW_TITLE.c_str(), WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_FLAGS);
     s_sdl_context = SDL_GL_CreateContext(s_sdl_window);
     SDL_GL_MakeCurrent(s_sdl_window, s_sdl_context);
+
+    gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress);
 
     SDL_GL_SetSwapInterval(0);
 

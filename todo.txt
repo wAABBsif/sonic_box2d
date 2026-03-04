@@ -1,5 +1,4 @@
 implement rendering system
-implement textures
 implement sprites
 implement camera
 
