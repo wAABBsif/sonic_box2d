@@ -7,7 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-using namespace sb2d::assets;
+using namespace sb2d::gfx;
 
 texture::texture(const std::string &path)
 {

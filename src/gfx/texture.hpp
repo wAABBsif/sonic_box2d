@@ -1,9 +1,9 @@
 #pragma once
-#include "asset.hpp"
+#include "core/asset.hpp"
 #include "glm/fwd.hpp"
 #include "glm/glm.hpp"
 
-namespace sb2d::assets
+namespace sb2d::gfx
 {
     class texture : public asset<texture>
     {

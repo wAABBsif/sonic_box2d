@@ -1,7 +1,7 @@
 #pragma once
-#include "asset.hpp"
+#include "core/asset.hpp"
 
-namespace sb2d::assets
+namespace sb2d::gfx
 {
     class shader : public asset<shader>
     {

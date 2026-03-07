@@ -1,5 +1,5 @@
 #pragma once
-#include "assets/shader.hpp"
+#include "shader.hpp"
 #include <cstddef>
 #include <cstdint>
 
@@ -57,7 +57,7 @@ namespace sb2d::gfx
         static size_t s_vertex_count;
 
     protected:
-        static std::shared_ptr<assets::shader> s_shader;
+        static std::shared_ptr<shader> s_shader;
 
         void create_render_objects()
         {

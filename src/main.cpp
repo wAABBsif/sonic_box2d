@@ -1,4 +1,4 @@
-#include "assets/asset.hpp"
+#include "core/asset.hpp"
 #include "game/game.hpp"
 
 int main(int argc, char *argv[])

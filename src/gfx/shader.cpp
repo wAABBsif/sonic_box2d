@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 
-using namespace sb2d::assets;
+using namespace sb2d::gfx;
 
 struct shader_program_source
 {

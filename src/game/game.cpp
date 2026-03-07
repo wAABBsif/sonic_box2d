@@ -5,6 +5,7 @@
 #include "debug/debug_ui.hpp"
 #include "game/entity.hpp"
 #include "gfx/gfx.hpp"
+#include <gfx/renderer.hpp>
 
 using namespace sb2d;
 

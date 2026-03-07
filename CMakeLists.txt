@@ -59,12 +59,12 @@ set(PROJECT_FILES src/main.cpp
     src/debug/components_window.cpp
     src/core/transformations.hpp
     src/core/transformations.cpp
-    src/assets/asset.hpp
-    src/assets/asset.cpp
-    src/assets/shader.hpp
-    src/assets/shader.cpp
-    src/assets/texture.hpp
-    src/assets/texture.cpp
+    src/core/asset.hpp
+    src/core/asset.cpp
+    src/gfx/shader.hpp
+    src/gfx/shader.cpp
+    src/gfx/texture.hpp
+    src/gfx/texture.cpp
     src/gfx/renderer.hpp
     src/gfx/renderer.cpp
 )
