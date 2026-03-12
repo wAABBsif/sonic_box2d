@@ -7,11 +7,10 @@ namespace sb2d::gfx
     {
     private:
         uint32_t program_id;
-    public:
-        shader(const std::string &path);
-        ~shader();
+        void unload_self() override;
 
-        static void set_current(const shader& s);
-        static void reset_current();
+    public:
+        shader(const std::string& path);
+        static void set_current(const std::string& path);
     };
 }

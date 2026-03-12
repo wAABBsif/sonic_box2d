@@ -12,7 +12,11 @@ namespace sb2d::gfx
             glm::ivec2 size;
         public:
             texture(const std::string &path);
-            ~texture();
+            void unload_self() override;
+
+            static texture* load(const std::string& path);
+            static bool unload(const std::string& path);
+            static texture* get(const std::string& path);
 
             glm::ivec2 get_size();
 

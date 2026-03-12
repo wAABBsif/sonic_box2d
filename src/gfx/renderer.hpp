@@ -56,7 +56,7 @@ namespace sb2d::gfx
         static inline uint32_t s_vertex_attrib_count;
         static inline size_t s_vertex_size;
 
-        static inline std::shared_ptr<shader> s_shader;
+        static inline std::string s_shader;
 
     protected:
         static void create_render_objects()
@@ -107,12 +107,12 @@ namespace sb2d::gfx
             renderer_base::write_vertex_data(s_vertex_size * offset_count, s_vertex_size * count, data);
         }
 
-        static void set_shader(std::shared_ptr<shader> value)
+        static void set_shader(const std::string& path)
         {
-            s_shader = value;
+            s_shader = path;
         }
 
-        static std::weak_ptr<shader> get_shader()
+        static std::string& get_shader()
         {
             return s_shader;
         }

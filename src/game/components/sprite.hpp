@@ -11,11 +11,11 @@ namespace sb2d::game::components
     class sprite : public gfx::renderer<sprite>, public component
     {
     public:
-        std::shared_ptr<gfx::texture> texture;
+        std::string texture;
         std::array<glm::ivec2, 2> texture_coords;
         float depth;
 
-        sprite(const std::shared_ptr<gfx::texture>& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
+        sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
 
         constexpr std::string get_name() override;
         void update_debug_inspector() override;

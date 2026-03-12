@@ -40,7 +40,7 @@ texture::texture(const std::string &path)
     LOG_MESSAGE("Texture '", path, "' loaded");
 }
 
-texture::~texture()
+void texture::unload_self()
 {
     glDeleteTextures(1, &this->gl_id);
 }

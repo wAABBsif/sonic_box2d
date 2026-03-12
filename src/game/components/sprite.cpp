@@ -26,7 +26,7 @@ struct sprite_vertex
 static std::array<sprite_vertex, sprite::capacity * 4> s_vertices;
 static size_t s_quad_count;
 
-sprite::sprite(const std::shared_ptr<gfx::texture>& texture, std::array<glm::ivec2, 2> texture_coords, float depth)
+sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth)
     : texture(texture), texture_coords(texture_coords), depth(depth) 
 {}
 
@@ -46,6 +46,7 @@ void sprite::init()
 {
     create_render_objects();
     bind_render_objects();
+    set_shader("shaders/sprite.glsl");
     set_vertex_total_size(sizeof(sprite_vertex));
 
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, position), 2, false);
@@ -59,8 +60,6 @@ void sprite::init()
     generate_quad_indices(indices, capacity);
     create_index_data(capacity * 6, indices, false);
 
-    set_shader(shader::get("shaders/sprite.glsl"));
-
     unbind_render_objects();
 }
 
@@ -68,16 +67,16 @@ void sprite::terminate()
 {
     unbind_render_objects();
     destroy_render_objects();
-    set_shader(nullptr);
 }
 
 void sprite::draw()
 {  
     bind_render_objects();
-    auto s = get_shader().lock();
-    shader::set_current(*s.get());
+    shader::set_current(get_shader());
+
     write_vertex_data(0, s_quad_count * 4, s_vertices.data());
     draw_elements(s_quad_count * 6);
+    
     s_quad_count = 0;
 }
 

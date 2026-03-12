@@ -103,12 +103,15 @@ shader::shader(const std::string &path)
     LOG_MESSAGE("Shader '", path, "' loaded");
 }
 
-shader::~shader()
+void shader::unload_self()
 {
     glDeleteProgram(this->program_id);
 }
 
-void shader::set_current(const shader& s)
+void shader::set_current(const std::string& path)
 {
-    glUseProgram(s.program_id);
+    shader *s = get(path);
+    if (s == NULL)
+        s = load(path);
+    glUseProgram(s->program_id);
 }
