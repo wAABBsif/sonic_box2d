@@ -6,7 +6,7 @@
 
 namespace sb2d::game::components
 {
-    class transform : public component
+    class transform : public component<transform>
     {
     public:
         glm::vec2 position;

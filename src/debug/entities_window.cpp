@@ -7,25 +7,25 @@
 using namespace sb2d::game;
 using namespace sb2d::debug_ui;
 
-static std::weak_ptr<sb2d::game::entity> selected_entity;
+static entity::entity_id selected_entity;
 
 void entities_window::update()
 {
 #if defined (IS_DEBUG)
     ImGui::Begin("Entities");
     ImGui::BeginListBox("##Entities", ImGui::GetContentRegionAvail());
-    for (auto& obj : game::entity::get_all())
+    for (auto& entity : game::entity::get_all())
     {
-        bool selected = ImGui::Selectable(obj->name.c_str(), selected_entity.lock() == obj);
+        bool selected = ImGui::Selectable(entity.second.name.c_str(), selected_entity == entity.first);
         if (selected)
-            selected_entity = obj;
+            selected_entity = entity.first;
     }
     ImGui::EndListBox();
     ImGui::End();
 #endif
 }
 
-std::weak_ptr<entity> entities_window::get_selection()
+entity::entity_id entities_window::get_selection()
 {
     return selected_entity;
 }

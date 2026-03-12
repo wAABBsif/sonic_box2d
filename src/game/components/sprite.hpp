@@ -8,7 +8,7 @@
 
 namespace sb2d::game::components
 {
-    class sprite : public gfx::renderer<sprite>, public component
+    class sprite : public gfx::renderer<sprite>, public component<sprite>
     {
     public:
         std::string texture;

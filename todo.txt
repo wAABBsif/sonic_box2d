@@ -1,7 +1,7 @@
 implement sprites
 implement camera
 
-simpler component interface
+implement systems
 
 implement audio
 implement music

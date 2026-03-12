@@ -1,42 +1,46 @@
 #pragma once
-#include "component.hpp"
 #include <cstdint>
-#include <memory>
 #include <string>
-#include <vector>
+#include <map>
 
 namespace sb2d::game
 {
     class entity
     {
     public:
+        using entity_id = size_t;
+        using tag_mask = uint32_t;
+
         enum tag : uint8_t
         {
-            NONE = 0,
-            QUEUE_DELETION = 1 << 0
+            TAG_DELETION,
+            TAG_COUNT
         };
 
+    private:
+        static inline std::map<entity_id, entity> s_entities;
+        static inline entity_id s_next_id;
+
+        entity(const std::string& name);
+        static entity_id get_unique_id();
+
+    public:
         static void init();
         static void terminate();
         static void update();
+        
+        static entity_id create(const std::string& name = "");
 
-        entity(std::string name = "", tag tags = NONE);
-        static std::weak_ptr<entity> create(std::string name = "", tag tags = NONE);
+        static std::map<entity_id, entity>& get_all();
 
-        static size_t get_count();
-        static std::vector<std::shared_ptr<entity>>& get_all();
-         
     public:
         std::string name;
-    private:
-        tag tags;
-        
-    public:
-        std::vector<std::shared_ptr<component>> components;
 
+        tag_mask tags;
+
+    public:
         void set_tag(tag t, bool value);
         bool get_tag(tag t);
-
-        void queue_deletion();
+        tag_mask get_tag_mask();
     };
 }
