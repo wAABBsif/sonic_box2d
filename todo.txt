@@ -2,6 +2,9 @@ implement rendering system
 implement sprites
 implement camera
 
+redo asset system lol
+simpler component interface
+
 implement audio
 implement music
 implement sounds

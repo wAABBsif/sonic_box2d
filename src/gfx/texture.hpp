@@ -17,5 +17,6 @@ namespace sb2d::gfx
             glm::ivec2 get_size();
 
             static void set_slot(const texture &t, const int slot);
+            static constexpr int slot_count = 16;
     };
 }

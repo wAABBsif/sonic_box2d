@@ -1,6 +1,7 @@
 #include "gfx.hpp"
 #include "SDL3/SDL_video.h"
 #include "core/log.hpp"
+#include "game/components/sprite.hpp"
 #include "glad/glad.h"
 #include "imgui/backends/imgui_impl_sdl3.h"
 #include "debug/debug_ui.hpp"
@@ -33,6 +34,8 @@ void gfx::init()
 
     SDL_GL_SetSwapInterval(0);
 
+    game::components::sprite::init();
+
     LOG_MESSAGE("Initialized graphics");
 }
 
@@ -41,6 +44,7 @@ void gfx::draw()
     glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    game::components::sprite::draw();
     debug_ui::draw();
 
     SDL_GL_SwapWindow(s_sdl_window);
@@ -48,6 +52,8 @@ void gfx::draw()
 
 void gfx::terminate()
 {
+    game::components::sprite::terminate();
+
     SDL_DestroyWindow(s_sdl_window);
 
     LOG_MESSAGE("Terminated graphics");

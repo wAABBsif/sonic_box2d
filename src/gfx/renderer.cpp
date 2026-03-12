@@ -86,6 +86,8 @@ void renderer_base::unbind_render_objects()
     glBindVertexArray(0);
 }
 
+#include "core/log.hpp"
+
 void renderer_base::add_vertex_attribute_float(uint32_t index, size_t offset, size_t total_size, field_type type, int count, bool normalized)
 {
     glVertexAttribPointer(index, count, gl_type_from_field_type(type), normalized, total_size, (void*)offset);
@@ -111,4 +113,9 @@ void renderer_base::write_vertex_data(size_t offset, size_t size, void* data)
 void renderer_base::create_index_data(size_t size, void* data, bool is_dynamic)
 {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, is_dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+}
+
+void renderer_base::draw_elements(size_t element_count)
+{
+    glDrawElements(GL_TRIANGLES, element_count, GL_UNSIGNED_SHORT, 0);
 }

@@ -2,6 +2,7 @@
 #include "shader.hpp"
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 
 namespace sb2d::gfx
 {
@@ -48,63 +49,72 @@ namespace sb2d::gfx
     class renderer : public renderer_base
     {
     private:
-        static uint32_t s_vao;
-        static uint32_t s_vbo;
-        static uint32_t s_ibo;
+        static inline uint32_t s_vao;
+        static inline uint32_t s_vbo;
+        static inline uint32_t s_ibo;
 
-        static uint32_t s_vertex_attrib_count;
-        static size_t s_vertex_size;
-        static size_t s_vertex_count;
+        static inline uint32_t s_vertex_attrib_count;
+        static inline size_t s_vertex_size;
+
+        static inline std::shared_ptr<shader> s_shader;
 
     protected:
-        static std::shared_ptr<shader> s_shader;
-
-        void create_render_objects()
+        static void create_render_objects()
         {
-            create_render_objects(s_vao, s_vbo, s_ibo);
+            renderer_base::create_render_objects(s_vao, s_vbo, s_ibo);
         }
 
-        void destroy_render_objects()
+        static void destroy_render_objects()
         {
-            destroy_render_objects(s_vao, s_vbo, s_ibo);
+            renderer_base::destroy_render_objects(s_vao, s_vbo, s_ibo);
         }
 
-        void bind_render_objects()
+        static void bind_render_objects()
         {
-            bind_render_objects(s_vao, s_vbo, s_ibo);
+            renderer_base::bind_render_objects(s_vao, s_vbo, s_ibo);
         }
 
-        void set_vertex_total_size(size_t size)
+        static void set_vertex_total_size(size_t size)
         {
             s_vertex_size = size;
         }
 
-        void add_vertex_attribute_float(field_type type, size_t offset, int count, bool normalized)
+        static void add_vertex_attribute_float(field_type type, size_t offset, int count, bool normalized)
         {
-            add_vertex_attribute_float(s_vertex_attrib_count, offset, s_vertex_size, type, count, normalized);
+            renderer_base::add_vertex_attribute_float(s_vertex_attrib_count, offset, s_vertex_size, type, count, normalized);
             s_vertex_attrib_count++;
         }
 
-        void add_vertex_attribute_int(field_type type, size_t offset, int count)
+        static void add_vertex_attribute_int(field_type type, size_t offset, int count)
         {
-            add_vertex_attribute_int(s_vertex_attrib_count, offset, s_vertex_size, type, count);
+            renderer_base::add_vertex_attribute_int(s_vertex_attrib_count, offset, s_vertex_size, type, count);
             s_vertex_attrib_count++;
         }
 
-        void create_vertex_data(size_t count, void* data, bool is_dynamic)
+        static void create_vertex_data(size_t count, void* data, bool is_dynamic)
         {
-            create_vertex_data(s_vertex_size * count, data, is_dynamic);
+            renderer_base::create_vertex_data(s_vertex_size * count, data, is_dynamic);
             s_vertex_attrib_count = count;
         }
 
-        void write_vertex_data(size_t offset_count, size_t count, void* data)
+        static void create_index_data(size_t count, void* data, bool is_dynamic)
         {
-            write_vertex_data(s_vertex_size * offset_count, s_vertex_size * count, data);
+            renderer_base::create_index_data(count * sizeof(uint16_t), data, is_dynamic);
         }
 
-        void draw_elements()
+        static void write_vertex_data(size_t offset_count, size_t count, void* data)
         {
-            draw_elements(s_vertex_count * 6);
+            renderer_base::write_vertex_data(s_vertex_size * offset_count, s_vertex_size * count, data);
+        }
+
+        static void set_shader(std::shared_ptr<shader> value)
+        {
+            s_shader = value;
+        }
+
+        static std::weak_ptr<shader> get_shader()
+        {
+            return s_shader;
         }
     };
 }

@@ -67,6 +67,8 @@ set(PROJECT_FILES src/main.cpp
     src/gfx/texture.cpp
     src/gfx/renderer.hpp
     src/gfx/renderer.cpp
+    src/game/components/sprite.hpp
+    src/game/components/sprite.cpp
 )
 
 add_executable(${PROJECT_NAME}
