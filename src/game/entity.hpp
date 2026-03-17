@@ -1,16 +1,13 @@
 #pragma once
-#include <cstdint>
-#include <string>
-#include <map>
+#include "component.hpp"
 
 namespace sb2d::game
 {
+    using tag_mask = uint32_t;
+
     class entity
     {
     public:
-        using entity_id = size_t;
-        using tag_mask = uint32_t;
-
         enum tag : uint8_t
         {
             TAG_DELETION,
@@ -31,16 +28,25 @@ namespace sb2d::game
         
         static entity_id create(const std::string& name = "");
 
+        static entity* get(entity_id id);
         static std::map<entity_id, entity>& get_all();
 
     public:
         std::string name;
 
         tag_mask tags;
+        component_mask components;
 
     public:
         void set_tag(tag t, bool value);
         bool get_tag(tag t);
         tag_mask get_tag_mask();
+
+    public:
+        bool has_component(component_base::type type);
+        component_mask get_component_mask();
+        void set_component_mask(component_mask mask);
+
+        friend class component_base;
     };
 }

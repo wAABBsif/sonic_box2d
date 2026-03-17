@@ -7,7 +7,7 @@
 using namespace sb2d::game;
 using namespace sb2d::debug_ui;
 
-static entity::entity_id selected_entity;
+static entity_id selected_entity;
 
 void entities_window::update()
 {
@@ -25,7 +25,7 @@ void entities_window::update()
 #endif
 }
 
-entity::entity_id entities_window::get_selection()
+entity_id entities_window::get_selection()
 {
     return selected_entity;
 }

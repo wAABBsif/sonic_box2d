@@ -6,11 +6,17 @@
 #include <memory>
 #include "core/transformations.hpp"
 
+using namespace sb2d::game;
 using namespace sb2d::game::components;
 
 transform::transform(glm::vec2 position, float rotation, glm::vec2 scale)
     : position(position), rotation(rotation), scale(scale)
 {}
+
+constexpr component_base::type transform::get_type()
+{
+    return type::COMPONENT_TRANSFORM;
+}
 
 constexpr std::string transform::get_name()
 {

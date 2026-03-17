@@ -12,6 +12,7 @@
 #include "core/log.hpp"
 #include "imgui/imgui.h"
 
+using namespace sb2d::game;
 using namespace sb2d::game::components;
 using namespace sb2d::gfx;
 
@@ -29,6 +30,11 @@ static size_t s_quad_count;
 sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth)
     : texture(texture), texture_coords(texture_coords), depth(depth) 
 {}
+
+constexpr component_base::type sprite::get_type()
+{
+    return type::COMPONENT_SPRITE;
+}
 
 constexpr std::string sprite::get_name()
 {

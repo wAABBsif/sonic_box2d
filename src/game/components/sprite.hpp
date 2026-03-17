@@ -17,6 +17,7 @@ namespace sb2d::game::components
 
         sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
 
+        constexpr type get_type() override;
         constexpr std::string get_name() override;
         void update_debug_inspector() override;
 
