@@ -1,1 +1,1 @@
-bin/debug/sonic_box2d res
+gdb --args bin/debug/sonic_box2d res
