@@ -1,5 +1,6 @@
 #include "sprite.hpp"
 #include "core/transformations.hpp"
+#include "game/component.hpp"
 #include "game/components/transform.hpp"
 #include "gfx/renderer.hpp"
 #include "gfx/shader.hpp"
@@ -33,7 +34,7 @@ sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coo
 
 constexpr component_base::type sprite::get_type()
 {
-    return type::COMPONENT_SPRITE;
+    return COMPONENT_SPRITE;
 }
 
 constexpr std::string sprite::get_name()
@@ -46,6 +47,18 @@ void sprite::update_debug_inspector()
 #if defined (IS_DEBUG)
     ImGui::Text("I'll do this later...");
 #endif
+}
+
+sprite* sprite::add(entity_id id, const std::string &texture, std::array<glm::ivec2, 2> texture_coords, float depth)
+{
+    enable_component(id, COMPONENT_SPRITE);
+    return &get_all().insert({id, sprite(texture, texture_coords, depth)}).first->second;
+}
+
+void sprite::remove(entity_id id)
+{
+    disable_component(id, COMPONENT_SPRITE);
+    get_all().erase(id);
 }
 
 void sprite::init()

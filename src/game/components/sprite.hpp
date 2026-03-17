@@ -21,6 +21,9 @@ namespace sb2d::game::components
         constexpr std::string get_name() override;
         void update_debug_inspector() override;
 
+        static sprite* add(entity_id id, const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
+        static void remove(entity_id id);
+
         static void init();
         static void terminate();
         static void draw();

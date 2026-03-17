@@ -1,9 +1,9 @@
 #include "transform.hpp"
+#include "game/component.hpp"
 #include "glm/ext/vector_float2.hpp"
 #include "glm/ext/matrix_float3x3.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "imgui.h"
-#include <memory>
 #include "core/transformations.hpp"
 
 using namespace sb2d::game;
@@ -15,7 +15,7 @@ transform::transform(glm::vec2 position, float rotation, glm::vec2 scale)
 
 constexpr component_base::type transform::get_type()
 {
-    return type::COMPONENT_TRANSFORM;
+    return COMPONENT_TRANSFORM;
 }
 
 constexpr std::string transform::get_name()
@@ -30,6 +30,18 @@ void transform::update_debug_inspector()
     ImGui::DragFloat("Rotation", &this->rotation, 0.01f);
     ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&this->scale), 0.01f);
 #endif
+}
+
+transform* transform::add(entity_id id, glm::vec2 position, float rotation, glm::vec2 scale)
+{
+    enable_component(id, COMPONENT_TRANSFORM);
+    return &get_all().insert({id, transform(position, rotation, scale)}).first->second;
+}
+
+void transform::remove(entity_id id)
+{
+    disable_component(id, COMPONENT_TRANSFORM);
+    get_all().erase(id);
 }
 
 glm::mat3 transform::local_to_world()

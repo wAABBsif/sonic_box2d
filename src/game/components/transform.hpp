@@ -19,6 +19,9 @@ namespace sb2d::game::components
         constexpr std::string get_name() override;
         void update_debug_inspector() override;
 
+        static transform* add(entity_id id, glm::vec2 position = glm::vec2(0, 0), float rotation = 0, glm::vec2 scale = glm::vec2(1, 1));
+        static void remove(entity_id id);
+
         glm::mat3 local_to_world();
         glm::mat3 world_to_local();
     };

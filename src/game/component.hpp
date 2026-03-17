@@ -39,6 +39,11 @@ namespace sb2d::game
     {
         static inline std::map<entity_id, derived> s_elements;
 
+    protected:
+        static inline std::map<entity_id, derived>& get_all()
+        {
+            return s_elements;
+        }
     public:
         static derived* get(entity_id id)
         {
@@ -47,19 +52,6 @@ namespace sb2d::game
                 return nullptr;
 
             return &it->second;
-        }
-
-        static void add(entity_id id)
-        {
-            derived d = derived();
-            enable_component(id, d.get_type());
-            s_elements.insert({id, d});
-        }
-
-        static void remove(entity_id id)
-        {
-            disable_component(id, derived().get_type());
-            s_elements.erase(id);
         }
     };
 }
