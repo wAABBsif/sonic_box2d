@@ -14,10 +14,6 @@ namespace sb2d::gfx
             texture(const std::string &path);
             void unload_self() override;
 
-            static texture* load(const std::string& path);
-            static bool unload(const std::string& path);
-            static texture* get(const std::string& path);
-
             glm::ivec2 get_size();
 
             static void set_slot(const texture &t, const int slot);

@@ -113,21 +113,6 @@ void shader::set_current(const shader& shader)
     glUseProgram(shader.program_id);
 }
 
-shader* shader::load(const std::string& path)
-{
-    return asset<shader>::load(path);
-}
-
-bool shader::unload(const std::string& path)
-{
-    return asset<shader>::unload(path);
-}
-
-shader* shader::get(const std::string& path)
-{
-    return asset<shader>::get(path);
-}
-
 void shader::set_int(const std::string &name, const int32_t value)
 {
     glUniform1i(glGetUniformLocation(this->program_id, name.c_str()), value);

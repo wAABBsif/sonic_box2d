@@ -26,6 +26,12 @@ namespace sb2d
         virtual ~asset() {}
         virtual void unload_self() = 0;
 
+    public:
+        static std::map<std::string, derived>& get_all()
+        {
+            return s_loaded_assets;
+        }
+
         static derived* load(const std::string& path)
         {
             auto it = s_loaded_assets.insert({path, derived(get_asset_directory() + path)});
@@ -53,11 +59,6 @@ namespace sb2d
                 return nullptr;
 
             return &it->second;
-        }
-
-        static std::map<std::string, derived>& get_all()
-        {
-            return s_loaded_assets;
         }
     };
 }

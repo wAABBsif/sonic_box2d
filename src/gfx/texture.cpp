@@ -57,18 +57,3 @@ void texture::set_slot(const texture &t, const int slot)
     glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, t.gl_id);
 }
-
-texture* texture::load(const std::string& path)
-{
-    return asset<texture>::load(path);
-}
-
-bool texture::unload(const std::string& path)
-{
-    return asset<texture>::unload(path);
-}
-
-texture* texture::get(const std::string& path)
-{
-    return asset<texture>::get(path);
-}

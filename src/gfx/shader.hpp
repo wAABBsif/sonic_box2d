@@ -14,10 +14,6 @@ namespace sb2d::gfx
         shader(const std::string& path);
         static void set_current(const shader& shader);
 
-        static shader* load(const std::string& path);
-        static bool unload(const std::string& path);
-        static shader* get(const std::string& path);
-
         void set_int(const std::string &name, const int32_t value);
         void set_uint(const std::string &name, const uint32_t value);
         void set_float(const std::string &name, const float value);
