@@ -108,10 +108,22 @@ void shader::unload_self()
     glDeleteProgram(this->program_id);
 }
 
-void shader::set_current(const std::string& path)
+void shader::set_current(const shader& shader)
 {
-    shader *s = get(path);
-    if (s == NULL)
-        s = load(path);
-    glUseProgram(s->program_id);
+    glUseProgram(shader.program_id);
+}
+
+shader* shader::load(const std::string& path)
+{
+    return asset<shader>::load(path);
+}
+
+bool shader::unload(const std::string& path)
+{
+    return asset<shader>::unload(path);
+}
+
+shader* shader::get(const std::string& path)
+{
+    return asset<shader>::get(path);
 }

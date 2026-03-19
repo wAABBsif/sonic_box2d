@@ -41,7 +41,7 @@ namespace sb2d
             if (it == s_loaded_assets.end())
                 return false;
 
-            it->second.unload_self();
+            reinterpret_cast<asset<derived>*>(&it->second)->unload_self();
             s_loaded_assets.erase(it);
             return true;
         }

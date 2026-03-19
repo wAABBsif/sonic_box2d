@@ -84,6 +84,7 @@ void sprite::init()
 
 void sprite::terminate()
 {
+    set_shader();
     unbind_render_objects();
     destroy_render_objects();
 }

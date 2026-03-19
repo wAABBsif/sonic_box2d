@@ -107,14 +107,19 @@ namespace sb2d::gfx
             renderer_base::write_vertex_data(s_vertex_size * offset_count, s_vertex_size * count, data);
         }
 
-        static void set_shader(const std::string& path)
+        static void set_shader(const std::string& path = "")
         {
+            if (shader::get(path))
+                shader::unload(path);
+            if (path.empty())
+                return;
             s_shader = path;
+            shader::load(path);
         }
 
-        static std::string& get_shader()
+        static shader& get_shader()
         {
-            return s_shader;
+            return *shader::get(s_shader);
         }
     };
 }

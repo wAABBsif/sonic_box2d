@@ -1,5 +1,6 @@
 #pragma once
 #include "core/asset.hpp"
+#include "glm/glm.hpp"
 
 namespace sb2d::gfx
 {
@@ -11,6 +12,10 @@ namespace sb2d::gfx
 
     public:
         shader(const std::string& path);
-        static void set_current(const std::string& path);
+        static void set_current(const shader& shader);
+
+        static shader* load(const std::string& path);
+        static bool unload(const std::string& path);
+        static shader* get(const std::string& path);
     };
 }

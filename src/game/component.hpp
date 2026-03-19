@@ -44,6 +44,7 @@ namespace sb2d::game
         {
             return s_elements;
         }
+
     public:
         static derived* get(entity_id id)
         {
