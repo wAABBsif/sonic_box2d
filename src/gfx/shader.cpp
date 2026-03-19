@@ -1,5 +1,5 @@
 #include "shader.hpp"
-#include <GLES2/gl2.h>
+#include "glad/glad.h"
 #include "core/log.hpp"
 #include <cstdint>
 #include <fstream>
@@ -126,4 +126,34 @@ bool shader::unload(const std::string& path)
 shader* shader::get(const std::string& path)
 {
     return asset<shader>::get(path);
+}
+
+void shader::set_int(const std::string &name, const int32_t value)
+{
+    glUniform1i(glGetUniformLocation(this->program_id, name.c_str()), value);
+}
+
+void shader::set_uint(const std::string &name, const uint32_t value)
+{
+    glUniform1ui(glGetUniformLocation(this->program_id, name.c_str()), value);
+}
+
+void shader::set_float(const std::string &name, const float value)
+{
+    glUniform1f(glGetUniformLocation(this->program_id, name.c_str()), value);
+}
+
+void shader::set_vec2(const std::string &name, const glm::vec2 value)
+{
+    glUniform2f(glGetUniformLocation(this->program_id, name.c_str()), value.x, value.y);
+}
+
+void shader::set_ivec2(const std::string &name, const glm::ivec2 value)
+{
+    glUniform2i(glGetUniformLocation(this->program_id, name.c_str()), value.x, value.y);
+}
+
+void shader::set_mat3(const std::string &name, const glm::mat3 value)
+{
+    glUniformMatrix3fv(glGetUniformLocation(this->program_id, name.c_str()), 1, false, (float*)&value);
 }

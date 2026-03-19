@@ -17,5 +17,12 @@ namespace sb2d::gfx
         static shader* load(const std::string& path);
         static bool unload(const std::string& path);
         static shader* get(const std::string& path);
+
+        void set_int(const std::string &name, const int32_t value);
+        void set_uint(const std::string &name, const uint32_t value);
+        void set_float(const std::string &name, const float value);
+        void set_vec2(const std::string &name, const glm::vec2 value);
+        void set_ivec2(const std::string &name, const glm::ivec2 value);
+        void set_mat3(const std::string &name, const glm::mat3 value);
     };
 }
