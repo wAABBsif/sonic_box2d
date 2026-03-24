@@ -52,7 +52,7 @@ glm::ivec2 texture::get_size()
 
 void texture::set_slot(const texture &t, const int slot)
 {
-    if (slot >= 16)
+    if (slot >= slot_count)
         LOG_WARNING("Texture slot ", slot, " may not be supported!");
     glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, t.gl_id);

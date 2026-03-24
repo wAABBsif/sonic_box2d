@@ -8,7 +8,9 @@
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/ext/vector_float2.hpp"
 #include "glm/fwd.hpp"
+#include <algorithm>
 #include <cstddef>
+#include <iterator>
 #include <memory>
 #include "core/log.hpp"
 #include "imgui/imgui.h"
@@ -27,6 +29,7 @@ struct sprite_vertex
 
 static std::array<sprite_vertex, sprite::capacity * 4> s_vertices;
 static size_t s_quad_count;
+static std::vector<std::string> s_current_textures;
 
 sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth)
     : texture(texture), texture_coords(texture_coords), depth(depth) 
@@ -65,13 +68,15 @@ void sprite::init()
 {
     create_render_objects();
     bind_render_objects();
+
     set_shader("shaders/sprite.glsl");
     set_vertex_total_size(sizeof(sprite_vertex));
+    s_current_textures.reserve(texture::slot_count);
 
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, position), 2, false);
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, texture_coords), 2, false);
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, depth), 1, false);
-    add_vertex_attribute_int(renderer_base::field_type::INT_32, offsetof(sprite_vertex, position), 2);
+    add_vertex_attribute_int(renderer_base::field_type::INT_32, offsetof(sprite_vertex, texture_index), 2);
 
     create_vertex_data(capacity * 4, nullptr, true);
 
@@ -94,10 +99,22 @@ void sprite::draw()
     bind_render_objects();
     shader::set_current(get_shader());
 
+    for (int i = 0; i < s_current_textures.size(); i++)
+    {
+        auto& path = s_current_textures[i];
+        auto t = texture::get(path);
+        if (!t)
+            t = texture::load(path);
+
+        get_shader().set_int("textures[" + std::to_string(i) + "]", i);
+        texture::set_slot(*t, i);
+    }
+
     write_vertex_data(0, s_quad_count * 4, s_vertices.data());
     draw_elements(s_quad_count * 6);
-    
+
     s_quad_count = 0;
+    s_current_textures.clear();
 }
 
 void sprite::create_quad(sb2d::game::components::transform trans)
@@ -109,6 +126,19 @@ void sprite::create_quad(sb2d::game::components::transform trans)
     }
 
     int texture_idx = 0;
+    auto it = std::find(s_current_textures.begin(), s_current_textures.end(), this->texture);
+    if (it == s_current_textures.end())
+    {
+        texture_idx = s_current_textures.size();
+        s_current_textures.push_back(this->texture);
+    }
+    else
+    {
+        texture_idx = std::distance(s_current_textures.begin(), it);
+    }
+
+    if (texture_idx >= texture::slot_count)
+        LOG_WARNING("Using slot beyond expected limit!");
 
     s_vertices[s_quad_count * 4 + 0] = {glm::vec2(-0.5f, +0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[0].y), this->depth, texture_idx};
     s_vertices[s_quad_count * 4 + 1] = {glm::vec2(-0.5f, -0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[1].y), this->depth, texture_idx};
