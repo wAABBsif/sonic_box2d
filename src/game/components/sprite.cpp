@@ -14,6 +14,7 @@
 #include <memory>
 #include "core/log.hpp"
 #include "imgui/imgui.h"
+#include "imgui/misc/cpp/imgui_stdlib.h"
 
 using namespace sb2d::game;
 using namespace sb2d::game::components;
@@ -48,7 +49,10 @@ constexpr std::string sprite::get_name()
 void sprite::update_debug_inspector()
 {
 #if defined (IS_DEBUG)
-    ImGui::Text("I'll do this later...");
+    ImGui::InputText("Texture", &this->texture);
+    ImGui::DragInt2("Texture Coords", reinterpret_cast<int*>(&texture_coords[0]), 1, 0, 65536);
+    ImGui::DragInt2("", reinterpret_cast<int*>(&texture_coords[1]), 1, 0, 65536);
+    ImGui::DragFloat("Depth", &this->depth, 1, 0, 0, "%.2f"); 
 #endif
 }
 
