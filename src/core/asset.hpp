@@ -3,11 +3,13 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <utility>
 
 namespace sb2d
 {
     class asset_base
     {
+        asset_base(asset_base& a) = delete;
     protected:
         asset_base() {}
         virtual ~asset_base() {}
@@ -24,7 +26,6 @@ namespace sb2d
     protected:
         asset() {}
         virtual ~asset() {}
-        virtual void unload_self() = 0;
 
     public:
         static std::map<std::string, derived>& get_all()
@@ -34,7 +35,7 @@ namespace sb2d
 
         static derived* load(const std::string& path)
         {
-            auto it = s_loaded_assets.insert({path, derived(get_asset_directory() + path)});
+            auto it = s_loaded_assets.emplace(path, get_asset_directory() + path);
             if (!it.second)
                 LOG_WARNING("Asset '", path, "' has already been loaded");
 
@@ -47,7 +48,6 @@ namespace sb2d
             if (it == s_loaded_assets.end())
                 return false;
 
-            reinterpret_cast<asset<derived>*>(&it->second)->unload_self();
             s_loaded_assets.erase(it);
             return true;
         }
