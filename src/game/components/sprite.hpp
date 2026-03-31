@@ -13,7 +13,7 @@ namespace sb2d::game::components
     public:
         std::string texture;
         std::array<glm::ivec2, 2> texture_coords;
-        float depth;
+        int32_t depth;
 
         sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
 

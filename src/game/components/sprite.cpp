@@ -24,8 +24,8 @@ struct sprite_vertex
 {
     glm::vec2 position;
     glm::vec2 texture_coords;
-    float depth;
-    int texture_index;
+    int32_t depth;
+    int32_t texture_index;
 };
 
 static std::array<sprite_vertex, sprite::capacity * 4> s_vertices;
@@ -52,7 +52,7 @@ void sprite::update_debug_inspector()
     ImGui::InputText("Texture", &this->texture);
     ImGui::DragInt2("Texture Coords", reinterpret_cast<int*>(&texture_coords[0]), 1, 0, 65536);
     ImGui::DragInt2("", reinterpret_cast<int*>(&texture_coords[1]), 1, 0, 65536);
-    ImGui::DragFloat("Depth", &this->depth, 1, 0, 0, "%.2f"); 
+    ImGui::DragInt("Depth", &this->depth, 1, 0, 0); 
 #endif
 }
 
@@ -79,7 +79,7 @@ void sprite::init()
 
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, position), 2, false);
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, texture_coords), 2, false);
-    add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, depth), 1, false);
+    add_vertex_attribute_float(renderer_base::field_type::INT_32, offsetof(sprite_vertex, depth), 1, true);
     add_vertex_attribute_int(renderer_base::field_type::INT_32, offsetof(sprite_vertex, texture_index), 2);
 
     create_vertex_data(capacity * 4, nullptr, true);
