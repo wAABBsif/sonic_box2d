@@ -108,7 +108,10 @@ void sprite::draw()
         auto& path = s_current_textures[i];
         auto t = texture::get(path);
         if (!t)
-            t = texture::load(path);
+        {
+            LOG_WARNING("Texture ", path, " not loaded!");
+            continue;
+        }
 
         get_shader().set_int("textures[" + std::to_string(i) + "]", i);
         texture::set_slot(*t, i);
