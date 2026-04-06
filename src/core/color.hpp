@@ -2,8 +2,6 @@
 
 namespace sb2d
 {
-    struct color;
-
     struct color
     {
         float r;
@@ -11,7 +9,9 @@ namespace sb2d
         float b;
         float a;
 
-        constexpr color(float r = 0, float g = 0, float b = 0, float a = 1);
+        constexpr color(float r = 0, float g = 0, float b = 0, float a = 1)
+            : r(r), g(g), b(b), a(a)
+        {}
         
         float& operator[](int index);
         float* data();
@@ -29,11 +29,11 @@ namespace sb2d
         bool operator==(const color& other) const;
         bool operator!=(const color& other) const;
 
-        static constexpr color red();
-        static constexpr color green();
-        static constexpr color blue();
-        static constexpr color black();
-        static constexpr color white();
-        static constexpr color clear();
+        static constexpr color black() { return color(0, 0, 0); }
+        static constexpr color white() { return color(1, 1, 1); }
+        static constexpr color clear() { return color(1, 1, 1, 0); }
+        static constexpr color red() { return color(1, 0, 0); }
+        static constexpr color green() { return color(0, 1, 0); }
+        static constexpr color blue() { return color(0, 0, 1); }
     };
 }

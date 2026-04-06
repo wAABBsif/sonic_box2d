@@ -2,10 +2,6 @@
 
 using namespace sb2d;
 
-constexpr color::color(float r, float g, float b, float a)
-    : r(r), g(g), b(b), a(a)
-{}
-
 float& color::operator[](int index)
 {
     return this->data()[index];
@@ -68,34 +64,4 @@ bool color::operator==(const color& other) const
 bool color::operator!=(const color& other) const
 {
     return !(*this == other);
-}
-
-constexpr color color::red()
-{
-    return color(1, 0, 0);
-}
-
-constexpr color color::green()
-{
-    return color(0, 1, 0);
-}
-
-constexpr color color::blue()
-{
-    return color(0, 0, 1);
-}
-
-constexpr color color::black()
-{
-    return color(0, 0, 0);
-}
-
-constexpr color color::white()
-{
-    return color(1, 1, 1);
-}
-
-constexpr color color::clear()
-{
-    return color(1, 1, 1, 0);
 }
