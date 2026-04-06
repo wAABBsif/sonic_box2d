@@ -24,6 +24,7 @@ struct sprite_vertex
 {
     glm::vec2 position;
     glm::vec2 texture_coords;
+    sb2d::color tint;
     int32_t depth;
     int32_t texture_index;
 };
@@ -32,8 +33,8 @@ static std::array<sprite_vertex, sprite::capacity * 4> s_vertices;
 static size_t s_quad_count;
 static std::vector<std::string> s_current_textures;
 
-sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth)
-    : texture(texture), texture_coords(texture_coords), depth(depth) 
+sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth, color tint)
+    : texture(texture), texture_coords(texture_coords), depth(depth), tint(tint) 
 {}
 
 constexpr component_base::type sprite::get_type()
@@ -52,6 +53,7 @@ void sprite::update_debug_inspector()
     ImGui::InputText("Texture", &this->texture);
     ImGui::DragInt2("Texture Coords", reinterpret_cast<int*>(&texture_coords[0]), 1, 0, 65536);
     ImGui::DragInt2("", reinterpret_cast<int*>(&texture_coords[1]), 1, 0, 65536);
+    ImGui::ColorEdit4("Tint", this->tint.data());
     ImGui::DragInt("Depth", &this->depth, 1, 0, 0); 
 #endif
 }
@@ -79,6 +81,7 @@ void sprite::init()
 
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, position), 2, false);
     add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, texture_coords), 2, false);
+    add_vertex_attribute_float(renderer_base::field_type::FLOAT_32, offsetof(sprite_vertex, tint), 4, false);
     add_vertex_attribute_float(renderer_base::field_type::INT_32, offsetof(sprite_vertex, depth), 1, true);
     add_vertex_attribute_int(renderer_base::field_type::INT_32, offsetof(sprite_vertex, texture_index), 2);
 
@@ -147,10 +150,10 @@ void sprite::create_quad(sb2d::game::components::transform trans)
     if (texture_idx >= texture::slot_count)
         LOG_WARNING("Using slot beyond expected limit!");
 
-    s_vertices[s_quad_count * 4 + 0] = {glm::vec2(-0.5f, +0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[0].y), this->depth, texture_idx};
-    s_vertices[s_quad_count * 4 + 1] = {glm::vec2(-0.5f, -0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[1].y), this->depth, texture_idx};
-    s_vertices[s_quad_count * 4 + 2] = {glm::vec2(+0.5f, -0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[1].y), this->depth, texture_idx};
-    s_vertices[s_quad_count * 4 + 3] = {glm::vec2(+0.5f, +0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[0].y), this->depth, texture_idx};
+    s_vertices[s_quad_count * 4 + 0] = {glm::vec2(-0.5f, +0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
+    s_vertices[s_quad_count * 4 + 1] = {glm::vec2(-0.5f, -0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
+    s_vertices[s_quad_count * 4 + 2] = {glm::vec2(+0.5f, -0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
+    s_vertices[s_quad_count * 4 + 3] = {glm::vec2(+0.5f, +0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
 
     const glm::mat3 mat = trans.local_to_world();
     for (int i = 0; i < 4; i++)

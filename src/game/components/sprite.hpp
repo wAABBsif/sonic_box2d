@@ -5,6 +5,7 @@
 #include "gfx/texture.hpp"
 #include "glm/fwd.hpp"
 #include <memory>
+#include "core/color.hpp"
 
 namespace sb2d::game::components
 {
@@ -13,9 +14,10 @@ namespace sb2d::game::components
     public:
         std::string texture;
         std::array<glm::ivec2, 2> texture_coords;
+        color tint;
         int32_t depth;
 
-        sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
+        sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0, color tint = color::white());
 
         constexpr type get_type() override;
         constexpr std::string get_name() override;

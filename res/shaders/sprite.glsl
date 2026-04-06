@@ -3,11 +3,13 @@
 
 layout(location = 0) in vec2 in_position;
 layout(location = 1) in vec2 in_texture_coords;
-layout(location = 2) in float in_depth;
-layout(location = 3) in int in_texture_index;
+layout(location = 2) in vec4 in_tint;
+layout(location = 3) in float in_depth;
+layout(location = 4) in int in_texture_index;
 
 out vec2 frag_texture_coords;
 flat out int frag_texture_index;
+out vec4 frag_tint;
 
 uniform sampler2D textures[16];
 
@@ -57,6 +59,7 @@ void main()
 {
     gl_Position = vec4(in_position, in_depth, 1);
     frag_texture_coords = in_texture_coords;
+    frag_tint = in_tint;
     frag_texture_index = in_texture_index;
 
     frag_texture_coords /= textureSize(get_tex(frag_texture_index), 0);
@@ -69,6 +72,7 @@ layout(location = 0) out vec4 out_color;
 
 in vec2 frag_texture_coords;
 flat in int frag_texture_index;
+in vec4 frag_tint;
 
 uniform sampler2D textures[16];
 
@@ -117,4 +121,5 @@ sampler2D get_tex(int idx)
 void main()
 {
     out_color = texture(textures[frag_texture_index], frag_texture_coords);
+    out_color *= frag_tint;
 }
