@@ -57,7 +57,7 @@ sampler2D get_tex(int idx)
 
 void main()
 {
-    gl_Position = vec4(in_position, in_depth, 1);
+    gl_Position = vec4(in_position, 0, 1);
     frag_texture_coords = in_texture_coords;
     frag_tint = in_tint;
     frag_texture_index = in_texture_index;

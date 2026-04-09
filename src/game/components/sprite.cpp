@@ -29,7 +29,12 @@ struct sprite_vertex
     int32_t texture_index;
 };
 
-static std::array<sprite_vertex, sprite::capacity * 4> s_vertices;
+struct sprite_quad
+{
+    sprite_vertex vertices[4];
+};
+
+static std::array<sprite_quad, sprite::capacity> s_quads;
 static size_t s_quad_count;
 static std::vector<std::string> s_current_textures;
 
@@ -102,9 +107,16 @@ void sprite::terminate()
 }
 
 void sprite::draw()
-{  
+{
     bind_render_objects();
     shader::set_current(get_shader());
+
+    std::sort(s_quads.begin(), s_quads.end(), 
+        [](const sprite_quad& a, const sprite_quad& b)
+        {
+            return a.vertices[0].depth < b.vertices[0].depth;
+        }
+    );
 
     for (int i = 0; i < s_current_textures.size(); i++)
     {
@@ -120,7 +132,7 @@ void sprite::draw()
         texture::set_slot(*t, i);
     }
 
-    write_vertex_data(0, s_quad_count * 4, s_vertices.data());
+    write_vertex_data(0, s_quad_count * 4, s_quads.data());
     draw_elements(s_quad_count * 6);
 
     s_quad_count = 0;
@@ -150,17 +162,17 @@ void sprite::create_quad(sb2d::game::components::transform trans)
     if (texture_idx >= texture::slot_count)
         LOG_WARNING("Using slot beyond expected limit!");
 
-    s_vertices[s_quad_count * 4 + 0] = {glm::vec2(-0.5f, +0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
-    s_vertices[s_quad_count * 4 + 1] = {glm::vec2(-0.5f, -0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
-    s_vertices[s_quad_count * 4 + 2] = {glm::vec2(+0.5f, -0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
-    s_vertices[s_quad_count * 4 + 3] = {glm::vec2(+0.5f, +0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
+    s_quads[s_quad_count].vertices[0] = {glm::vec2(-0.5f, +0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
+    s_quads[s_quad_count].vertices[1] = {glm::vec2(-0.5f, -0.5f), glm::vec2(this->texture_coords[0].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
+    s_quads[s_quad_count].vertices[2] = {glm::vec2(+0.5f, -0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
+    s_quads[s_quad_count].vertices[3] = {glm::vec2(+0.5f, +0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
 
     const glm::mat3 mat = trans.local_to_world();
     for (int i = 0; i < 4; i++)
     {
-        glm::vec3 v = glm::vec3(s_vertices[s_quad_count * 4 + i].position.x, s_vertices[s_quad_count * 4 + i].position.y, 1);
+        glm::vec3 v = glm::vec3(s_quads[s_quad_count].vertices[i].position.x, s_quads[s_quad_count].vertices[i].position.y, 1);
         v = mat * v;
-        s_vertices[s_quad_count * 4 + i].position = v;
+        s_quads[s_quad_count].vertices[i].position = v;
     }
 
     s_quad_count++;
