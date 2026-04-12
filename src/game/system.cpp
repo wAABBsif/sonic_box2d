@@ -1,4 +1,5 @@
 #include "system.hpp"
+#include "game/systems/sprite_manager.hpp"
 #include <vector>
 
 using namespace sb2d::game;
@@ -7,7 +8,7 @@ static std::vector<system_base*> s_systems;
 
 void system_base::init()
 {
-
+    systems::sprite_manager::init();
 }
 
 void system_base::update()

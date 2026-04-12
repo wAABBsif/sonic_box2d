@@ -30,7 +30,7 @@ namespace sb2d::game::components
         static void terminate();
         static void draw();
 
-        void create_quad(sb2d::game::components::transform trans);
+        void create_quad(sb2d::game::components::transform& trans);
 
         static constexpr int capacity = 1024;
     };

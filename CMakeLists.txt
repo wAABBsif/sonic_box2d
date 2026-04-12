@@ -76,6 +76,8 @@ set(PROJECT_FILES src/main.cpp
     src/core/singleton.hpp
     src/game/system.hpp
     src/game/system.cpp
+    src/game/systems/sprite_manager.hpp
+    src/game/systems/sprite_manager.cpp
 )
 
 add_executable(${PROJECT_NAME}

@@ -139,7 +139,7 @@ void sprite::draw()
     s_current_textures.clear();
 }
 
-void sprite::create_quad(sb2d::game::components::transform trans)
+void sprite::create_quad(sb2d::game::components::transform& trans)
 {
     if (s_quad_count >= sprite::capacity)
     {
