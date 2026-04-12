@@ -73,6 +73,9 @@ set(PROJECT_FILES src/main.cpp
     src/game/components/sprite.cpp
     src/core/color.hpp
     src/core/color.cpp
+    src/core/singleton.hpp
+    src/game/system.hpp
+    src/game/system.cpp
 )
 
 add_executable(${PROJECT_NAME}

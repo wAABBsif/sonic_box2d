@@ -1,0 +1,34 @@
+#include "system.hpp"
+#include <vector>
+
+using namespace sb2d::game;
+
+static std::vector<system_base*> s_systems;
+
+void system_base::init()
+{
+
+}
+
+void system_base::update()
+{
+    for (auto s : s_systems)
+    {
+        std::map<entity_id, entity>& entities = entity::get_all();
+        for (auto it = entities.begin(); it != entities.end(); it++)
+        {
+            if ((it->second.get_component_mask() & s->components) != s->components)
+                continue;
+
+            if ((it->second.get_tag_mask() & s->tags) != s->tags)
+                continue;
+
+            s->iterate(it);
+        }
+    }
+}
+
+void system_base::add_system(system_base* system)
+{
+    s_systems.push_back(system);
+}

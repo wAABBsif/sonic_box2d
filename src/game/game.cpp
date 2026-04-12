@@ -4,6 +4,7 @@
 #include "core/time.hpp"
 #include "debug/debug_ui.hpp"
 #include "game/entity.hpp"
+#include "game/system.hpp"
 #include "gfx/gfx.hpp"
 #include <gfx/renderer.hpp>
 
@@ -40,6 +41,7 @@ static void s_init()
     gfx::init();
     debug_ui::init();
     game::entity::init();
+    game::system_base::init();
 }
 
 static void s_update()
@@ -47,6 +49,7 @@ static void s_update()
     time::update();
     sdl_interface::handle_events();
 
+    game::system_base::update();
     game::entity::update();
     debug_ui::update();
 
