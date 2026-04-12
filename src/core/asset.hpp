@@ -2,8 +2,6 @@
 #include "core/log.hpp"
 #include <map>
 #include <string>
-#include <memory>
-#include <utility>
 
 namespace sb2d
 {
@@ -11,8 +9,8 @@ namespace sb2d
     {
         asset_base(asset_base& a) = delete;
     protected:
-        asset_base() {}
-        virtual ~asset_base() {}
+        asset_base() = default;
+        virtual ~asset_base() = default;
     public:
         static void set_asset_directory(const std::string& path);
         static const std::string& get_asset_directory();
@@ -24,8 +22,8 @@ namespace sb2d
     private:
         static inline std::map<std::string, derived> s_loaded_assets;
     protected:
-        asset() {}
-        virtual ~asset() {}
+        asset() = default;
+        virtual ~asset() = default;
 
     public:
         static std::map<std::string, derived>& get_all()

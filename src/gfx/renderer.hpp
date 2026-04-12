@@ -9,8 +9,8 @@ namespace sb2d::gfx
     class renderer_base
     {
         protected:
-            renderer_base() {}
-            virtual ~renderer_base() {}
+            renderer_base() = default;
+            virtual ~renderer_base() = default;
 
             enum class field_type : uint8_t
             {
