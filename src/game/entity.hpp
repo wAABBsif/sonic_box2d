@@ -24,7 +24,6 @@ namespace sb2d::game
     public:
         static void init();
         static void terminate();
-        static void update();
         
         static entity_id create(const std::string& name = "");
 

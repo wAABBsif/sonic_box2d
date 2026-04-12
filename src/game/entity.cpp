@@ -27,18 +27,6 @@ void entity::terminate()
     LOG_MESSAGE("Terminated entities");
 }
 
-void entity::update()
-{
-    for (auto it = s_entities.begin(); it != s_entities.end(); it++)
-    {
-        if ((it->second).get_tag(TAG_DELETION))
-        {
-            s_entities.erase(it);
-            it--;
-        }
-    }
-}
-
 entity_id entity::create(const std::string& name)
 {
     entity_id id = get_unique_id();

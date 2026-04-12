@@ -17,5 +17,5 @@ void sprite_manager::init()
     self.components |= component_base::COMPONENT_TRANSFORM;
     self.components |= component_base::COMPONENT_SPRITE;
 
-    system_base::add_system(reinterpret_cast<system_base*>(&self));
+    add_system(&self);
 }

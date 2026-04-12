@@ -50,7 +50,6 @@ static void s_update()
     sdl_interface::handle_events();
 
     game::system_base::update();
-    game::entity::update();
     debug_ui::update();
 
     gfx::draw();

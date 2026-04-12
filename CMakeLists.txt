@@ -78,6 +78,8 @@ set(PROJECT_FILES src/main.cpp
     src/game/system.cpp
     src/game/systems/sprite_manager.hpp
     src/game/systems/sprite_manager.cpp
+    src/game/systems/deletion.hpp
+    src/game/systems/deletion.cpp
 )
 
 add_executable(${PROJECT_NAME}
