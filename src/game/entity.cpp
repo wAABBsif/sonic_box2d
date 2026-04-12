@@ -73,6 +73,11 @@ bool entity::get_tag(tag t)
     return this->tags & (1 << t);
 }
 
+tag_mask entity::get_tag_mask()
+{
+    return this->tags;
+}
+
 bool entity::has_component(component_base::type type)
 {
     return this->components & (1 << type);
