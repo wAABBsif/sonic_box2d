@@ -1,7 +1,4 @@
-implement sprites
 implement camera
-
-implement systems
 
 implement audio
 implement music

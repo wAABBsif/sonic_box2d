@@ -33,49 +33,49 @@ endif ()
 set(GLAD_FILES lib/GLAD/src/glad.c)
 
 set(PROJECT_FILES src/main.cpp
-    src/game/game.hpp
-    src/game/game.cpp
     src/core/log.hpp
     src/core/log.cpp
-    src/core/sdl_interface.hpp
-    src/core/sdl_interface.cpp
-    src/gfx/gfx.hpp
-    src/gfx/gfx.cpp
     src/core/time.hpp
     src/core/time.cpp
     src/core/scoped_timer.hpp
     src/core/scoped_timer.cpp
+    src/core/color.hpp
+    src/core/color.cpp
+    src/core/singleton.hpp
+    src/core/asset.hpp
+    src/core/asset.cpp
+    src/core/sdl_interface.hpp
+    src/core/sdl_interface.cpp
+    src/core/transformations.hpp
+    src/core/transformations.cpp
     src/debug/debug_ui.hpp
     src/debug/debug_ui.cpp
     src/debug/stats_window.hpp
     src/debug/stats_window.cpp
-    src/game/entity.hpp
-    src/game/entity.cpp
     src/debug/entities_window.hpp
     src/debug/entities_window.cpp
-    src/game/component.hpp
-    src/game/component.cpp
-    src/game/components/transform.hpp
-    src/game/components/transform.cpp
     src/debug/components_window.hpp
     src/debug/components_window.cpp
-    src/core/transformations.hpp
-    src/core/transformations.cpp
-    src/core/asset.hpp
-    src/core/asset.cpp
-    src/gfx/shader.hpp
-    src/gfx/shader.cpp
+    src/gfx/gfx.hpp
+    src/gfx/gfx.cpp
     src/gfx/texture.hpp
     src/gfx/texture.cpp
+    src/gfx/shader.hpp
+    src/gfx/shader.cpp
     src/gfx/renderer.hpp
     src/gfx/renderer.cpp
-    src/game/components/sprite.hpp
-    src/game/components/sprite.cpp
-    src/core/color.hpp
-    src/core/color.cpp
-    src/core/singleton.hpp
+    src/game/game.hpp
+    src/game/game.cpp
+    src/game/entity.hpp
+    src/game/entity.cpp
+    src/game/component.hpp
+    src/game/component.cpp
     src/game/system.hpp
     src/game/system.cpp
+    src/game/components/transform.hpp
+    src/game/components/transform.cpp
+    src/game/components/sprite.hpp
+    src/game/components/sprite.cpp
     src/game/systems/sprite_manager.hpp
     src/game/systems/sprite_manager.cpp
     src/game/systems/deletion.hpp
