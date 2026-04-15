@@ -64,6 +64,8 @@ set(PROJECT_FILES src/main.cpp
     src/gfx/shader.cpp
     src/gfx/renderer.hpp
     src/gfx/renderer.cpp
+    src/gfx/framebuffer.hpp
+    src/gfx/framebuffer.cpp
     src/game/game.hpp
     src/game/game.cpp
     src/game/entity.hpp

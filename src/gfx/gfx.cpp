@@ -2,6 +2,7 @@
 #include "SDL3/SDL_video.h"
 #include "core/log.hpp"
 #include "game/components/sprite.hpp"
+#include "gfx/framebuffer.hpp"
 #include "glad/glad.h"
 #include "imgui/backends/imgui_impl_sdl3.h"
 #include "debug/debug_ui.hpp"
@@ -39,6 +40,8 @@ void gfx::init()
 
     game::components::sprite::init();
 
+    framebuffer::reset_current_framebuffer();
+
     LOG_MESSAGE("Initialized graphics");
 }
 
@@ -67,4 +70,11 @@ void gfx::init_imgui()
 #if defined(IS_DEBUG)
     ImGui_ImplSDL3_InitForOpenGL(s_sdl_window, s_sdl_context);
 #endif
+}
+
+glm::ivec2 gfx::get_window_size()
+{
+    glm::ivec2 result;
+    SDL_GetWindowSize(s_sdl_window, &result.x, &result.y);
+    return result;
 }
