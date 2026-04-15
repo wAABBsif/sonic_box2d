@@ -29,9 +29,9 @@ namespace sb2d::gfx
 
             static void generate_quad_indices(uint16_t* const buffer, const uint16_t quad_count);
 
-            static void create_render_objects(uint32_t& vao, uint32_t& vbo, uint32_t& ibo);
-            static void destroy_render_objects(uint32_t vao, uint32_t vbo, uint32_t ibo);
-            static void bind_render_objects(uint32_t vao, uint32_t vbo, uint32_t ibo);
+            static void create_render_objects(gl_object& vao, gl_object& vbo, gl_object& ibo);
+            static void destroy_render_objects(gl_object vao, gl_object vbo, gl_object ibo);
+            static void bind_render_objects(gl_object vao, gl_object vbo, gl_object ibo);
             static void unbind_render_objects();
 
             static void add_vertex_attribute_float(uint32_t index, size_t offset, size_t total_size, field_type type, int count, bool normalized);
@@ -49,9 +49,9 @@ namespace sb2d::gfx
     class renderer : public renderer_base
     {
     private:
-        static inline uint32_t s_vao;
-        static inline uint32_t s_vbo;
-        static inline uint32_t s_ibo;
+        static inline gl_object s_vao;
+        static inline gl_object s_vbo;
+        static inline gl_object s_ibo;
 
         static inline uint32_t s_vertex_attrib_count;
         static inline size_t s_vertex_size;

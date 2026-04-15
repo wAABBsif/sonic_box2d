@@ -60,21 +60,21 @@ void renderer_base::generate_quad_indices(uint16_t* const buffer, const uint16_t
     }
 }
 
-void renderer_base::create_render_objects(uint32_t& vao, uint32_t& vbo, uint32_t& ibo)
+void renderer_base::create_render_objects(gl_object& vao, gl_object& vbo, gl_object& ibo)
 {
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glGenBuffers(1, &ibo);
 }
 
-void renderer_base::destroy_render_objects(uint32_t vao, uint32_t vbo, uint32_t ibo)
+void renderer_base::destroy_render_objects(gl_object vao, gl_object vbo, gl_object ibo)
 {
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
     glDeleteBuffers(1, &ibo);
 }
 
-void renderer_base::bind_render_objects(uint32_t vao, uint32_t vbo, uint32_t ibo)
+void renderer_base::bind_render_objects(gl_object vao, gl_object vbo, gl_object ibo)
 {
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);

@@ -1,8 +1,11 @@
 #pragma once
 #include "glm/glm.hpp"
+#include <cstdint>
 
 namespace sb2d::gfx
 {
+    using gl_object = uint32_t;
+
     void init();
     void terminate();
 

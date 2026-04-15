@@ -1,13 +1,14 @@
 #pragma once
 #include "core/asset.hpp"
 #include "glm/glm.hpp"
+#include "gfx.hpp"
 
 namespace sb2d::gfx
 {
     class shader : public asset<shader>
     {
     private:
-        uint32_t program_id;
+        gl_object program_id;
 
     public:
         shader(const std::string& path);

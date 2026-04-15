@@ -1,4 +1,5 @@
 #pragma once
+#include "gfx.hpp"
 #include <cstdint>
 #include "glm/glm.hpp"
 
@@ -8,8 +9,8 @@ namespace sb2d::gfx
     {
     private:
         glm::ivec2 size;
-        uint32_t fbo;
-        uint32_t texture_id;
+        gl_object fbo;
+        gl_object texture_id;
 
         void create_fbo();
         void create_texture();
