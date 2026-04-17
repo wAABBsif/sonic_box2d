@@ -1,5 +1,6 @@
 #include "gfx.hpp"
 #include "SDL3/SDL_video.h"
+#include "core/color.hpp"
 #include "core/log.hpp"
 #include "game/components/sprite.hpp"
 #include "gfx/framebuffer.hpp"
@@ -20,6 +21,7 @@ constexpr SDL_WindowFlags WINDOW_FLAGS =
 
 static SDL_Window* s_sdl_window;
 static SDL_GLContext s_sdl_context;
+static color s_color;
 
 void gfx::init()
 {
@@ -45,15 +47,11 @@ void gfx::init()
     LOG_MESSAGE("Initialized graphics");
 }
 
-void gfx::draw()
+void gfx::init_imgui()
 {
-    glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    game::components::sprite::draw();
-    debug_ui::draw();
-
-    SDL_GL_SwapWindow(s_sdl_window);
+#if defined(IS_DEBUG)
+    ImGui_ImplSDL3_InitForOpenGL(s_sdl_window, s_sdl_context);
+#endif
 }
 
 void gfx::terminate()
@@ -65,16 +63,26 @@ void gfx::terminate()
     LOG_MESSAGE("Terminated graphics");
 }
 
-void gfx::init_imgui()
-{
-#if defined(IS_DEBUG)
-    ImGui_ImplSDL3_InitForOpenGL(s_sdl_window, s_sdl_context);
-#endif
-}
-
 glm::ivec2 gfx::get_window_size()
 {
     glm::ivec2 result;
     SDL_GetWindowSize(s_sdl_window, &result.x, &result.y);
     return result;
+}
+
+void gfx::render_to_framebuffer(const framebuffer& fb, const color clear_color, const glm::mat3 world_to_screen)
+{
+    framebuffer::set_current_framebuffer(fb);
+    glClearColor(clear_color.r, clear_color.g, clear_color.b, clear_color.a);
+    glClear(GL_COLOR_BUFFER_BIT);
+    game::components::sprite::draw();
+    framebuffer::reset_current_framebuffer();
+}
+
+void gfx::render_to_screen()
+{
+    framebuffer::reset_current_framebuffer();
+    debug_ui::draw();
+
+    SDL_GL_SwapWindow(s_sdl_window);
 }

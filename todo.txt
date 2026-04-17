@@ -1,4 +1,6 @@
 implement camera
+decouple sprite rendering from component
+decouple "gfx" from rendering
 
 implement audio
 implement music

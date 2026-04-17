@@ -1,5 +1,4 @@
 #pragma once
-#include "gfx.hpp"
 #include <cstdint>
 #include "glm/glm.hpp"
 
@@ -7,6 +6,8 @@ namespace sb2d::gfx
 {
     class framebuffer
     {
+        using gl_object = uint32_t;
+
     private:
         glm::ivec2 size;
         gl_object fbo;

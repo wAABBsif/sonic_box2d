@@ -52,7 +52,7 @@ static void s_update()
     game::system_base::update();
     debug_ui::update();
 
-    gfx::draw();
+    gfx::render_to_screen();
 }
 
 static void s_terminate()
