@@ -1,0 +1,17 @@
+#pragma once
+#include "game/components/sprite.hpp"
+#include "game/system.hpp"
+
+namespace sb2d::game::systems
+{
+    struct sprite_renderer : public gfx::renderer<sprite_renderer>, public system<sprite_renderer>
+    {
+        static void init();
+        static void terminate();
+        static void draw();
+
+        void iterate(std::map<entity_id, entity>::iterator& it) override;
+
+        static constexpr int capacity = 1024;
+    };
+}

@@ -3,6 +3,7 @@
 #include "core/sdl_interface.hpp"
 #include "core/time.hpp"
 #include "debug/debug_ui.hpp"
+#include "game/component.hpp"
 #include "game/entity.hpp"
 #include "game/system.hpp"
 #include "gfx/gfx.hpp"

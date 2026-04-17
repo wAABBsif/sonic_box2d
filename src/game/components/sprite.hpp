@@ -9,7 +9,7 @@
 
 namespace sb2d::game::components
 {
-    class sprite : public gfx::renderer<sprite>, public component<sprite>
+    class sprite : public component<sprite>
     {
     public:
         std::string texture;
@@ -25,12 +25,6 @@ namespace sb2d::game::components
 
         static sprite* add(entity_id id, const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
         static void remove(entity_id id);
-
-        static void init();
-        static void terminate();
-        static void draw();
-
-        void create_quad(const glm::mat3 local_to_world);
 
         static constexpr int capacity = 1024;
     };

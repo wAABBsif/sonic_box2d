@@ -3,6 +3,7 @@
 #include "core/color.hpp"
 #include "core/log.hpp"
 #include "game/components/sprite.hpp"
+#include "game/systems/sprite_renderer.hpp"
 #include "gfx/framebuffer.hpp"
 #include "glad/glad.h"
 #include "imgui/backends/imgui_impl_sdl3.h"
@@ -40,7 +41,7 @@ void gfx::init()
 
     SDL_GL_SetSwapInterval(0);
 
-    game::components::sprite::init();
+    game::systems::sprite_renderer::init();
 
     framebuffer::reset_current_framebuffer();
 
@@ -56,7 +57,7 @@ void gfx::init_imgui()
 
 void gfx::terminate()
 {
-    game::components::sprite::terminate();
+    game::systems::sprite_renderer::terminate();
 
     SDL_DestroyWindow(s_sdl_window);
 
@@ -75,13 +76,15 @@ void gfx::render_to_framebuffer(const framebuffer& fb, const color clear_color, 
     framebuffer::set_current_framebuffer(fb);
     glClearColor(clear_color.r, clear_color.g, clear_color.b, clear_color.a);
     glClear(GL_COLOR_BUFFER_BIT);
-    game::components::sprite::draw();
+    game::systems::sprite_renderer::draw();
     framebuffer::reset_current_framebuffer();
 }
 
 void gfx::render_to_screen()
 {
-    framebuffer::reset_current_framebuffer();
+    glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    game::systems::sprite_renderer::draw();
     debug_ui::draw();
 
     SDL_GL_SwapWindow(s_sdl_window);
