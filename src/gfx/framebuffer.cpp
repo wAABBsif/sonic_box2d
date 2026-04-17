@@ -8,7 +8,7 @@ using namespace sb2d::gfx;
 void framebuffer::create_fbo()
 {
     if (glIsFramebuffer(fbo))
-        return;
+        glDeleteFramebuffers(1, &fbo);
 
     glGenFramebuffers(1, &fbo);
 }
@@ -39,6 +39,12 @@ framebuffer::framebuffer(const glm::ivec2 size)
 {
     create_fbo();
     create_texture();
+}
+
+framebuffer::~framebuffer()
+{
+    glDeleteFramebuffers(1, &fbo);
+    glDeleteTextures(1, &texture_id);
 }
 
 glm::ivec2 framebuffer::get_size()
