@@ -8,7 +8,7 @@ using namespace sb2d::game::systems;
 void sprite_manager::iterate(std::map<entity_id, entity>::iterator& it)
 {
     components::transform& transform = *components::transform::get(it->first);
-    components::sprite::get(it->first)->create_quad(transform);
+    components::sprite::get(it->first)->create_quad(transform.local_to_world());
 }
 
 void sprite_manager::init()

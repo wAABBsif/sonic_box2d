@@ -139,7 +139,7 @@ void sprite::draw()
     s_current_textures.clear();
 }
 
-void sprite::create_quad(sb2d::game::components::transform& trans)
+void sprite::create_quad(const glm::mat3 local_to_world)
 {
     if (s_quad_count >= sprite::capacity)
     {
@@ -167,11 +167,10 @@ void sprite::create_quad(sb2d::game::components::transform& trans)
     s_quads[s_quad_count].vertices[2] = {glm::vec2(+0.5f, -0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[1].y), this->tint, this->depth, texture_idx};
     s_quads[s_quad_count].vertices[3] = {glm::vec2(+0.5f, +0.5f), glm::vec2(this->texture_coords[1].x, this->texture_coords[0].y), this->tint, this->depth, texture_idx};
 
-    const glm::mat3 mat = trans.local_to_world();
     for (int i = 0; i < 4; i++)
     {
         glm::vec3 v = glm::vec3(s_quads[s_quad_count].vertices[i].position.x, s_quads[s_quad_count].vertices[i].position.y, 1);
-        v = mat * v;
+        v = local_to_world * v;
         s_quads[s_quad_count].vertices[i].position = v;
     }
 
