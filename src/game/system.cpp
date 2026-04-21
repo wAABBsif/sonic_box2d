@@ -21,7 +21,7 @@ void system_base::update()
     for (auto s : s_systems)
     {
         std::map<entity_id, entity>& entities = entity::get_all();
-        for (auto it = entities.begin(); it != entities.end(); it++)
+        for (auto it = entities.begin(); it != entities.end(); ++it)
         {
             if ((it->second.get_component_mask() & s->components) != s->components)
                 continue;
@@ -29,7 +29,9 @@ void system_base::update()
             if ((it->second.get_tag_mask() & s->tags) != s->tags)
                 continue;
 
-            s->iterate(it);
+            s->iterate(it); 
+            if (it == entities.end())
+                break;
         }
     }
 }

@@ -5,7 +5,7 @@ using namespace sb2d::game::systems;
 
 void deletion::iterate(std::map<entity_id, entity>::iterator& it)
 {
-    //it = entity::get_all().erase(it);
+    it = entity::get_all().erase(it);
 }
 
 void deletion::init()
