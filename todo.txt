@@ -1,6 +1,4 @@
 implement camera
-fix deletion
-decouple sprite rendering from component
 decouple "gfx" from rendering
 
 implement audio

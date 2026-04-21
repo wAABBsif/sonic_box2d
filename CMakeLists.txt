@@ -58,6 +58,10 @@ set(PROJECT_FILES src/main.cpp
     src/debug/components_window.cpp
     src/gfx/gfx.hpp
     src/gfx/gfx.cpp
+    src/gfx/window.hpp
+    src/gfx/window.cpp
+    src/gfx/sdl_window.hpp
+    src/gfx/sdl_window.cpp
     src/gfx/texture.hpp
     src/gfx/texture.cpp
     src/gfx/shader.hpp

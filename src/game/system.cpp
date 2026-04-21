@@ -10,10 +10,16 @@ static std::vector<system_base*> s_systems;
 
 void system_base::init()
 {
+    systems::sprite_renderer::init();
     systems::deletion::init();
 
     add_system(&systems::sprite_renderer::get());
     add_system(&systems::deletion::get());
+}
+
+void system_base::terminate()
+{
+    systems::sprite_renderer::terminate();
 }
 
 void system_base::update()

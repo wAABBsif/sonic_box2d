@@ -6,8 +6,9 @@
 #include "game/component.hpp"
 #include "game/entity.hpp"
 #include "game/system.hpp"
-#include "gfx/gfx.hpp"
-#include <gfx/renderer.hpp>
+#include "gfx/window.hpp"
+#include "gfx/sdl_window.hpp"
+#include "gfx/renderer.hpp"
 
 using namespace sb2d;
 
@@ -15,6 +16,8 @@ static void s_init();
 static void s_update();
 static void s_terminate();
 static bool s_is_running();
+
+static gfx::window* s_window;
 
 void game::run()
 {
@@ -39,7 +42,7 @@ static void s_init()
 
     sdl_interface::init();
     time::init();
-    gfx::init();
+    s_window = new gfx::sdl_window();
     debug_ui::init();
     game::entity::init();
     game::system_base::init();
@@ -53,18 +56,24 @@ static void s_update()
     game::system_base::update();
     debug_ui::update();
 
-    gfx::render_to_screen();
+    s_window->render_to_screen();
 }
 
 static void s_terminate()
 {
+    game::system_base::terminate();
     game::entity::terminate();
     debug_ui::terminate();
     sdl_interface::terminate();
-    gfx::terminate();
+    delete s_window;
 }
 
 static bool s_is_running()
 {
     return !sdl_interface::ready_to_quit();
+}
+
+gfx::window& game::get_main_window()
+{
+    return *s_window;
 }

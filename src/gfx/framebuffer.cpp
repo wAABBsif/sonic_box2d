@@ -1,7 +1,9 @@
 #include "gfx.hpp"
+#include "window.hpp"
 #include "framebuffer.hpp"
 #include "texture.hpp"
 #include "glad/glad.h"
+#include "game/game.hpp"
 
 using namespace sb2d::gfx;
 
@@ -66,7 +68,8 @@ void framebuffer::set_current_framebuffer(const framebuffer& buffer)
 
 void framebuffer::reset_current_framebuffer()
 {
-    glm::ivec2 size = gfx::get_window_size();
+    gfx::window& window = game::get_main_window();
+    glm::ivec2 size = window.get_size();
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glViewport(0, 0, size.x, size.y);
 }

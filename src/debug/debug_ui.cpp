@@ -3,11 +3,11 @@
 #include "backends/imgui_impl_sdl3.h"
 #include "imgui.h"
 #include "imgui_internal.h"
-#include "gfx/gfx.hpp"
-
+#include "gfx/window.hpp"
 #include "stats_window.hpp"
 #include "entities_window.hpp"
 #include "components_window.hpp"
+#include "game/game.hpp"
 
 using namespace sb2d;
 
@@ -30,7 +30,7 @@ void debug_ui::init()
 
     ImGui::StyleColorsDark();
 
-    gfx::init_imgui();
+    game::get_main_window().init_imgui();
     ImGui_ImplOpenGL3_Init();
 #endif
 }

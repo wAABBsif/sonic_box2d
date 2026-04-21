@@ -8,6 +8,7 @@ namespace sb2d::game
     struct system_base
     {
         static void init();
+        static void terminate();
         static void update();
         static void add_system(system_base* system);
     
