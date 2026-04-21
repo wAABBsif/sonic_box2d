@@ -1,6 +1,8 @@
 #pragma once
 #include "SDL3/SDL_video.h"
+#include "glm/fwd.hpp"
 #include "window.hpp"
+#include <string>
 
 namespace sb2d::gfx
 {
@@ -10,7 +12,7 @@ namespace sb2d::gfx
         SDL_Window* window;
         SDL_GLContext context;
     public:
-        sdl_window();
+        sdl_window(const std::string& title, const glm::ivec2 size);
         ~sdl_window();
     
         void swap_buffers() override;

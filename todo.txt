@@ -1,5 +1,4 @@
 implement camera
-decouple "gfx" from rendering
 
 implement audio
 implement music

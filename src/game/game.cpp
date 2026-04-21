@@ -42,7 +42,7 @@ static void s_init()
 
     sdl_interface::init();
     time::init();
-    s_window = new gfx::sdl_window();
+    s_window = new gfx::sdl_window("Sonic Box2D", glm::ivec2(640, 480));
     debug_ui::init();
     game::entity::init();
     game::system_base::init();

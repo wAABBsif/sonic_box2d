@@ -1,5 +1,6 @@
 #include "sdl_window.hpp"
 #include "SDL3/SDL_video.h"
+#include "glm/fwd.hpp"
 #include "imgui/backends/imgui_impl_sdl3.h"
 #include "glad/glad.h"
 #include <string>
@@ -7,22 +8,19 @@
 
 using namespace sb2d::gfx;
 
-constexpr std::string WINDOW_TITLE = "Sonic Box2D";
-constexpr int WINDOW_WIDTH = 640;
-constexpr int WINDOW_HEIGHT = 480;
 constexpr SDL_WindowFlags WINDOW_FLAGS = 
 {
     SDL_WINDOW_OPENGL
     | SDL_WINDOW_RESIZABLE
 };
 
-sdl_window::sdl_window()
+sdl_window::sdl_window(const std::string& title, const glm::ivec2 size)
 {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    window = SDL_CreateWindow(WINDOW_TITLE.c_str(), WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_FLAGS);
+    window = SDL_CreateWindow(title.c_str(), size.x, size.y, WINDOW_FLAGS);
     context = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, context);
 
@@ -33,7 +31,7 @@ sdl_window::sdl_window()
 
     SDL_GL_SetSwapInterval(0);
 
-    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    glViewport(0, 0, size.x, size.y);
 
     LOG_MESSAGE("Initialized SDL Window");
 }
