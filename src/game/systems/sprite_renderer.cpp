@@ -27,6 +27,7 @@ struct sprite_quad
 static std::array<sprite_quad, sprite_renderer::capacity> s_quads;
 static size_t s_quad_count;
 static std::vector<std::string> s_current_textures;
+static bool s_is_rendered = false;
 
 sprite_quad::sprite_quad(const sb2d::game::components::sprite& sprite, const glm::mat3 local_to_world)
 {
@@ -60,6 +61,12 @@ sprite_quad::sprite_quad(const sb2d::game::components::sprite& sprite, const glm
 
 void sprite_renderer::iterate(std::map<entity_id, entity>::iterator& it)
 {
+    if (s_is_rendered)
+    {
+        s_quad_count = 0;
+        s_is_rendered = false;
+    }
+
     if (s_quad_count >= sprite_renderer::capacity)
     {
         LOG_WARNING("Sprite quad count exceeds capacity!");
@@ -138,6 +145,6 @@ void sprite_renderer::draw()
     write_vertex_data(0, s_quad_count * 4, s_quads.data());
     draw_elements(s_quad_count * 6);
 
-    s_quad_count = 0;
+    s_is_rendered = true;
     s_current_textures.clear();
 }
