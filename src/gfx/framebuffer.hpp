@@ -18,6 +18,7 @@ namespace sb2d::gfx
 
     public:
         framebuffer(const glm::ivec2 size);
+        framebuffer(const framebuffer& fb);
         ~framebuffer();
 
         glm::ivec2 get_size();

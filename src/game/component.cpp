@@ -2,6 +2,7 @@
 #include "entity.hpp"
 #include "components/transform.hpp"
 #include "components/sprite.hpp"
+#include "game/components/camera.hpp"
 
 using namespace sb2d::game;
 
@@ -13,6 +14,8 @@ component_base* component_base::get(type type, entity_id id)
         return components::transform::get(id);
     case type::COMPONENT_SPRITE:
         return components::sprite::get(id);
+    case type::COMPONENT_CAMERA:
+        return components::camera::get(id);
     default:
         return nullptr;
     }

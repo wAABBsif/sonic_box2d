@@ -43,6 +43,10 @@ framebuffer::framebuffer(const glm::ivec2 size)
     create_texture();
 }
 
+framebuffer::framebuffer(const framebuffer& fb)
+    : size(fb.size), fbo(fb.fbo), texture_id(fb.texture_id)
+{}
+
 framebuffer::~framebuffer()
 {
     glDeleteFramebuffers(1, &fbo);
