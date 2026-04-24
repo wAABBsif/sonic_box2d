@@ -116,7 +116,7 @@ void sprite_renderer::terminate()
     destroy_render_objects();    
 }
 
-void sprite_renderer::draw()
+void sprite_renderer::draw(glm::mat3 world_to_screen)
 {
     bind_render_objects();
     shader::set_current(get_shader());
@@ -141,6 +141,8 @@ void sprite_renderer::draw()
         get_shader().set_int("textures[" + std::to_string(i) + "]", i);
         texture::set_slot(*t, i);
     }
+
+    get_shader().set_mat3("world_to_screen_matrix", world_to_screen);
 
     write_vertex_data(0, s_quad_count * 4, s_quads.data());
     draw_elements(s_quad_count * 6);

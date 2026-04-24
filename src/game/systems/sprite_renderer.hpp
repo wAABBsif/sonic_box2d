@@ -8,7 +8,7 @@ namespace sb2d::game::systems
     {
         static void init();
         static void terminate();
-        static void draw();
+        static void draw(glm::mat3 world_to_screen);
 
         void iterate(std::map<entity_id, entity>::iterator& it) override;
 

@@ -12,6 +12,7 @@ flat out int frag_texture_index;
 out vec4 frag_tint;
 
 uniform sampler2D textures[16];
+uniform mat3 world_to_screen_matrix;
 
 sampler2D get_tex(int idx)
 {
@@ -57,7 +58,7 @@ sampler2D get_tex(int idx)
 
 void main()
 {
-    gl_Position = vec4(in_position, 0, 1);
+    gl_Position = vec4((world_to_screen_matrix * vec3(in_position, 1)).xy, 0, 1);
     frag_texture_coords = in_texture_coords;
     frag_tint = in_tint;
     frag_texture_index = in_texture_index;
