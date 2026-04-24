@@ -25,6 +25,7 @@ void window::render_to_framebuffer(const framebuffer& fb, const color clear_colo
 
 void window::render_to_screen()
 {
+    framebuffer::reset_current_framebuffer();
     glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     game::systems::sprite_renderer::draw();
