@@ -86,6 +86,8 @@ set(PROJECT_FILES src/main.cpp
     src/game/components/camera.cpp
     src/game/systems/sprite_renderer.hpp
     src/game/systems/sprite_renderer.cpp
+    src/game/systems/camera_manager.hpp
+    src/game/systems/camera_manager.cpp
     src/game/systems/deletion.hpp
     src/game/systems/deletion.cpp
 )

@@ -4,8 +4,9 @@
 
 namespace sb2d::game::systems
 {
-    struct sprite_renderer : public gfx::renderer<sprite_renderer>, public system<sprite_renderer>
+    class sprite_renderer : public gfx::renderer<sprite_renderer>, public system<sprite_renderer>
     {
+    public:
         static void init();
         static void terminate();
         static void draw(glm::mat3 world_to_screen);
