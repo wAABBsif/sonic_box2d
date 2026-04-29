@@ -12,7 +12,7 @@ namespace sb2d::gfx
         window() = default;
         virtual ~window() = default;
 
-        void render_to_framebuffer(const framebuffer& fb, const color clear_color, const glm::mat3 world_to_camera);
+        void render_to_framebuffer(framebuffer& fb, const color clear_color, const glm::mat3 world_to_camera);
         void render_to_screen();
         
         virtual void swap_buffers() = 0;

@@ -37,18 +37,25 @@ void framebuffer::create_texture()
 }
 
 framebuffer::framebuffer(const glm::ivec2 size)
-    : size(size)
+    : size(size), is_active(false)
 {
     create_fbo();
     create_texture();
 }
 
 framebuffer::framebuffer(const framebuffer& fb)
-    : size(fb.size), fbo(fb.fbo), texture_id(fb.texture_id)
+    : size(fb.size), fbo(fb.fbo), texture_id(fb.texture_id), is_active(false)
+{}
+
+framebuffer::framebuffer(const framebuffer&& fb)
+    : size(fb.size), fbo(fb.fbo), texture_id(fb.texture_id), is_active(false)
 {}
 
 framebuffer::~framebuffer()
 {
+    if (!is_active)
+        return;
+
     glDeleteFramebuffers(1, &fbo);
     glDeleteTextures(1, &texture_id);
 }
@@ -64,8 +71,9 @@ void framebuffer::resize(const glm::ivec2 size)
     create_texture();
 }
 
-void framebuffer::set_current_framebuffer(const framebuffer& buffer)
+void framebuffer::set_current_framebuffer(framebuffer& buffer)
 {
+    buffer.is_active = true;
     glBindFramebuffer(GL_FRAMEBUFFER, buffer.fbo);
     glViewport(0, 0, buffer.size.x, buffer.size.y);
 }

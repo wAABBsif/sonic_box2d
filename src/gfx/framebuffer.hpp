@@ -12,6 +12,7 @@ namespace sb2d::gfx
         glm::ivec2 size;
         gl_object fbo;
         gl_object texture_id;
+        bool is_active;
 
         void create_fbo();
         void create_texture();
@@ -19,12 +20,15 @@ namespace sb2d::gfx
     public:
         framebuffer(const glm::ivec2 size);
         framebuffer(const framebuffer& fb);
+        framebuffer(const framebuffer&& fb);
         ~framebuffer();
+
+        void set_active();
 
         glm::ivec2 get_size();
         void resize(const glm::ivec2 size);
     
-        static void set_current_framebuffer(const framebuffer& buffer);
+        static void set_current_framebuffer(framebuffer& buffer);
         static void reset_current_framebuffer();
         
         static void set_texture_slot(const framebuffer& buffer, const int slot);

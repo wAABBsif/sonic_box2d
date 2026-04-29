@@ -15,7 +15,7 @@ static SDL_Window* s_sdl_window;
 static SDL_GLContext s_sdl_context;
 static color s_color;
 
-void window::render_to_framebuffer(const framebuffer& fb, const color clear_color, const glm::mat3 world_to_screen)
+void window::render_to_framebuffer(framebuffer& fb, const color clear_color, const glm::mat3 world_to_screen)
 {
     framebuffer::set_current_framebuffer(fb);
     glClearColor(clear_color.r, clear_color.g, clear_color.b, clear_color.a);
