@@ -3,7 +3,7 @@
 
 namespace sb2d::game::systems
 {
-    class camera_manager : public system<camera_manager>
+    class camera_renderer : public system<camera_renderer>
     {
     public:
         static void init();

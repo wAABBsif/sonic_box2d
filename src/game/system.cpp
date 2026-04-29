@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "game/systems/sprite_renderer.hpp"
-#include "game/systems/camera_manager.hpp"
+#include "game/systems/camera_renderer.hpp"
 #include "game/systems/deletion.hpp"
 
 using namespace sb2d::game;
@@ -12,11 +12,11 @@ static std::vector<system_base*> s_systems;
 void system_base::init()
 {
     systems::sprite_renderer::init();
-    systems::camera_manager::init();
+    systems::camera_renderer::init();
     systems::deletion::init();
 
     add_system(&systems::sprite_renderer::get());
-    add_system(&systems::camera_manager::get());
+    add_system(&systems::camera_renderer::get());
     add_system(&systems::deletion::get());
 }
 
