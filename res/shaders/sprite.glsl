@@ -121,6 +121,6 @@ sampler2D get_tex(int idx)
 
 void main()
 {
-    out_color = texture(textures[frag_texture_index], frag_texture_coords);
+    out_color = texture(get_tex(frag_texture_index), frag_texture_coords);
     out_color *= frag_tint;
 }

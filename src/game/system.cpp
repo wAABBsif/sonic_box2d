@@ -23,6 +23,7 @@ void system_base::init()
 void system_base::terminate()
 {
     systems::sprite_renderer::terminate();
+    systems::camera_renderer::terminate();
 }
 
 void system_base::update()
