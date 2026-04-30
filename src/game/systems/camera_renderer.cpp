@@ -64,6 +64,19 @@ void camera_renderer::terminate()
     destroy_render_objects();
 }
 
+
+void camera_renderer::draw_camera(glm::mat3 mat)
+{
+    components::camera* cam = components::camera::get(get_main_camera());
+    if (cam == nullptr)
+    {
+        LOG_WARNING("Main camera is not set!");
+        return;
+    }
+
+    draw_camera(*cam, mat);
+}
+
 void camera_renderer::draw_camera(components::camera &cam, glm::mat3 mat)
 {
     bind_render_objects();
@@ -74,4 +87,14 @@ void camera_renderer::draw_camera(components::camera &cam, glm::mat3 mat)
     get_shader().set_mat3("mat", mat);
 
     draw_elements(6);
+}
+
+game::entity_id camera_renderer::get_main_camera()
+{
+    return s_main_camera;
+}
+
+void camera_renderer::set_main_camera(const entity_id e)
+{
+    s_main_camera = e;
 }

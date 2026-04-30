@@ -6,6 +6,7 @@
 #include "gfx/framebuffer.hpp"
 #include "glad/glad.h"
 #include "debug/debug_ui.hpp"
+#include "game/systems/camera_renderer.hpp"
 #include "glm/ext/matrix_transform.hpp"
 
 using namespace sb2d;
@@ -33,6 +34,7 @@ void window::render_to_screen()
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    game::systems::camera_renderer::draw_camera();
     debug_ui::draw();
 
     swap_buffers();
