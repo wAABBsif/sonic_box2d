@@ -1,8 +1,6 @@
-implement camera
-
 implement audio
-implement music
 implement sounds
+implement music
 
 implement input
 implement keyboard input
