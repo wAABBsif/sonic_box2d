@@ -23,6 +23,7 @@ void camera_renderer::iterate(std::map<entity_id, entity>::iterator& it)
     components::transform& transform = *components::transform::get(it->first);
     components::camera& camera = *components::camera::get(it->first);
 
+    transform.scale.x = transform.scale.y * camera.get_framebuffer().get_size().x / camera.get_framebuffer().get_size().y;
     win.render_to_framebuffer(camera.get_framebuffer(), camera.clear_color, transform.world_to_local());
 }
 
@@ -64,25 +65,19 @@ void camera_renderer::terminate()
     destroy_render_objects();
 }
 
-
-void camera_renderer::draw_camera(glm::mat3 mat)
+void camera_renderer::draw_camera(entity_id id, glm::mat3 mat)
 {
-    components::camera* cam = components::camera::get(get_main_camera());
+    components::camera* cam = components::camera::get(s_main_camera);
     if (cam == nullptr)
     {
-        LOG_WARNING("Main camera is not set!");
+        LOG_WARNING("Attempted to draw nonexistent camera");
         return;
     }
 
-    draw_camera(*cam, mat);
-}
-
-void camera_renderer::draw_camera(components::camera &cam, glm::mat3 mat)
-{
     bind_render_objects();
     shader::set_current(get_shader());
 
-    framebuffer::set_texture_slot(cam.get_framebuffer(), 1);
+    framebuffer::set_texture_slot(cam->get_framebuffer(), 1);
     get_shader().set_int("tex", 1);
     get_shader().set_mat3("mat", mat);
 
@@ -91,6 +86,9 @@ void camera_renderer::draw_camera(components::camera &cam, glm::mat3 mat)
 
 game::entity_id camera_renderer::get_main_camera()
 {
+    components::camera* cam = components::camera::get(s_main_camera);
+    if (cam != nullptr)
+        cam->get_framebuffer().resize(get_main_window().get_size());
     return s_main_camera;
 }
 

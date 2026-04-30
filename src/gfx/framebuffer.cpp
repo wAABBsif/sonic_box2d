@@ -68,6 +68,8 @@ glm::ivec2 framebuffer::get_size()
 
 void framebuffer::resize(const glm::ivec2 size)
 {
+    if (size == this->size)
+        return;
     this->size = size;
     create_texture();
 }
