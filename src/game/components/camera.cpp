@@ -2,6 +2,7 @@
 #include "game/component.hpp"
 #include "gfx/framebuffer.hpp"
 #include "imgui.h"
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace sb2d::game;
 using namespace sb2d::game::components;
@@ -24,7 +25,10 @@ constexpr std::string camera::get_name()
 void camera::update_debug_inspector()
 {
 #if defined (IS_DEBUG)
-    ImGui::ColorEdit4("Clear Color", this->clear_color.data());    
+    ImGui::ColorEdit4("Clear Color", this->clear_color.data());
+    glm::ivec2 size = get_framebuffer().get_size();
+    ImGui::DragInt2("Viewport Size", glm::value_ptr(size));
+    get_framebuffer().resize(size);
 #endif
 }
 
