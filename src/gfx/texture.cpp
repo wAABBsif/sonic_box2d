@@ -1,7 +1,7 @@
 #include "texture.hpp"
 #include "core/log.hpp"
 #include "glm/fwd.hpp"
-#include <GLES2/gl2.h>
+#include <glad/glad.h>
 #include <cstddef>
 
 #define STB_IMAGE_IMPLEMENTATION
