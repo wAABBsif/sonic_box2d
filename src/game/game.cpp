@@ -9,6 +9,7 @@
 #include "gfx/window.hpp"
 #include "gfx/sdl_window.hpp"
 #include "gfx/renderer.hpp"
+#include "audio/device.hpp"
 
 using namespace sb2d;
 
@@ -18,6 +19,7 @@ static void s_terminate();
 static bool s_is_running();
 
 static gfx::window* s_window;
+static audio::device* s_audio_device;
 
 void game::run()
 {
@@ -43,6 +45,7 @@ static void s_init()
     sdl_interface::init();
     time::init();
     s_window = new gfx::sdl_window("Sonic Box2D", glm::ivec2(640, 480));
+    s_audio_device = new audio::device();
     debug_ui::init();
     game::entity::init();
     game::system_base::init();
@@ -64,8 +67,9 @@ static void s_terminate()
     game::system_base::terminate();
     game::entity::terminate();
     debug_ui::terminate();
-    sdl_interface::terminate();
     delete s_window;
+    delete s_audio_device;
+    sdl_interface::terminate();    
 }
 
 static bool s_is_running()

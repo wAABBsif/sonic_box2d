@@ -70,6 +70,10 @@ set(PROJECT_FILES src/main.cpp
     src/gfx/renderer.cpp
     src/gfx/framebuffer.hpp
     src/gfx/framebuffer.cpp
+    src/audio/audio.hpp
+    src/audio/audio.cpp
+    src/audio/device.hpp
+    src/audio/device.cpp
     src/game/game.hpp
     src/game/game.cpp
     src/game/entity.hpp
