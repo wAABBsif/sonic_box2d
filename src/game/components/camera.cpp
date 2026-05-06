@@ -1,5 +1,6 @@
 #include "camera.hpp"
 #include "game/component.hpp"
+#include "game/systems/camera_renderer.hpp"
 #include "gfx/framebuffer.hpp"
 #include "imgui.h"
 #include <glm/gtc/type_ptr.hpp>
@@ -10,7 +11,8 @@ using namespace sb2d::gfx;
 
 camera::camera(const glm::ivec2 texture_size, const color clear_color)
     : clear_color(clear_color), framebuffer(gfx::framebuffer(texture_size))
-{}
+{
+}
 
 constexpr component_base::type camera::get_type()
 {
@@ -40,5 +42,10 @@ framebuffer& camera::get_framebuffer()
 camera* camera::add(entity_id id, const glm::ivec2 texture_size, const color clear_color)
 {
     enable_component(id, COMPONENT_CAMERA);
-    return &get_all().insert({id, camera(texture_size, clear_color)}).first->second;
+    camera* result = &get_all().insert({id, camera(texture_size, clear_color)}).first->second;
+    if (camera::get(systems::camera_renderer::get_main_camera()) == nullptr)
+    {
+        systems::camera_renderer::set_main_camera(id);
+    }
+    return result;
 }
