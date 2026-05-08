@@ -4,15 +4,12 @@
 
 using namespace sb2d::audio;
 
-void load_wav(format& result, const std::string& path)
+void format::load_wav(const std::string& path)
 {
-    result.type = sb2d::audio::format::filetype::WAV;
-    result.buffer = nullptr;
-
     char header_buffer[0x2C];
-    std::ifstream file_stream = std::ifstream(path, std::ios::binary);
-    file_stream.read(header_buffer, 0x2C);
-    if (file_stream.eof())
+    stream = std::ifstream(path, std::ios::binary);
+    stream.read(header_buffer, 0x2C);
+    if (stream.eof())
     {
         LOG_WARNING(path + " is too short!");
         return;
@@ -26,34 +23,30 @@ void load_wav(format& result, const std::string& path)
         return;
     }
 
-    result.bits = *reinterpret_cast<uint16_t*>(header_buffer + 0x22);
-    result.channels = *reinterpret_cast<uint16_t*>(header_buffer + 0x16);
-    result.freq = *reinterpret_cast<uint32_t*>(header_buffer + 0x18);
-    result.size = *reinterpret_cast<uint32_t*>(header_buffer + 0x28);
-
-    result.buffer = new char[result.size];
-    file_stream.read(result.buffer, result.size);
-
-    return;
+    type = sb2d::audio::format::filetype::WAV;
+    bits = *reinterpret_cast<uint16_t*>(header_buffer + 0x22);
+    channels = *reinterpret_cast<uint16_t*>(header_buffer + 0x16);
+    freq = *reinterpret_cast<uint32_t*>(header_buffer + 0x18);
+    size = *reinterpret_cast<uint32_t*>(header_buffer + 0x28);
 }
 
 format::format(const std::string& path)
 {
     if (path.ends_with(".wav"))
     {
-       load_wav(*this, path);
+       load_wav(path);
        return;
     }
 
     LOG_WARNING("Audio file '", path, "' not supported");
 }
 
-format::~format()
+void format::read(char* buffer, uint32_t size)
 {
-    delete buffer;
+    stream.read(buffer, size);
 }
 
 bool format::isValid()
 {
-    return buffer != nullptr;
+    return type != filetype::NONE;
 }
