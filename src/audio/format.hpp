@@ -21,10 +21,10 @@ namespace sb2d::audio
     
     protected:
         format() = delete;
-        ~format();
 
     public:
         format(const std::string& path);
+        ~format();
         bool isValid();
     };
 }

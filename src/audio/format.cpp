@@ -23,7 +23,6 @@ void load_wav(format& result, const std::string& path)
             || std::string(header_buffer + 0xC, 4) != "fmt "
             || std::string(header_buffer + 0x24, 4) != "data")
     {
-        LOG_WARNING(path, " could not be loaded");
         return;
     }
 
