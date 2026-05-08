@@ -76,8 +76,6 @@ set(PROJECT_FILES src/main.cpp
     src/audio/device.cpp
     src/audio/format.hpp
     src/audio/format.cpp
-    src/audio/wav.hpp
-    src/audio/wav.cpp
     src/audio/clip.hpp
     src/audio/clip.cpp
     src/game/game.hpp
