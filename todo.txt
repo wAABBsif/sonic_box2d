@@ -1,6 +1,6 @@
-implement audio
-implement sounds
-implement music
+implement sound sources
+implement ogg file loading
+implement playing music
 
 implement input
 implement keyboard input
