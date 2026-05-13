@@ -6,17 +6,17 @@
 using namespace sb2d::audio;
 
 clip::clip(const std::string& path)
+    : fmt(path)
 {
-    format file_format = format(path);
-    char* buffer = new char[file_format.size];
-    file_format.read(buffer, file_format.size);
+    char* buffer = new char[fmt.size];
+    fmt.read(buffer, fmt.size);
 
     ALenum al_format;
-    if (file_format.channels == 1)
+    if (fmt.channels == 1)
     {
-        if (file_format.bits == 8)
+        if (fmt.bits == 8)
             al_format = AL_FORMAT_MONO8;
-        else if (file_format.bits == 16)
+        else if (fmt.bits == 16)
             al_format = AL_FORMAT_MONO16;
         else
         {
@@ -24,11 +24,11 @@ clip::clip(const std::string& path)
             return;
         }
     }
-    else if (file_format.channels == 2)
+    else if (fmt.channels == 2)
     {
-        if (file_format.bits == 8)
+        if (fmt.bits == 8)
             al_format = AL_FORMAT_STEREO8;
-        else if (file_format.bits == 16)
+        else if (fmt.bits == 16)
             al_format = AL_FORMAT_STEREO16;
         else
         {
@@ -43,7 +43,7 @@ clip::clip(const std::string& path)
     }
 
     alGenBuffers(1, &al_id);
-    alBufferData(al_id, al_format, buffer, file_format.size, file_format.freq);
+    alBufferData(al_id, al_format, buffer, fmt.size, fmt.freq);
 }
 
 clip::~clip()
