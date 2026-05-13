@@ -6,11 +6,13 @@ namespace sb2d::audio
 {
     class clip : public asset<clip>
     {
-        private:
-            al_object al_id;
+    private:
+        al_object al_id;
 
-        public:
-            clip(const std::string& path);
-            ~clip();
+    public:
+        clip(const std::string& path);
+        ~clip();
+
+        al_object get_al_id();
     };
 }

@@ -50,3 +50,8 @@ clip::~clip()
 {
     alDeleteBuffers(1, &al_id);
 }
+
+al_object clip::get_al_id()
+{
+    return al_id;
+}
