@@ -94,6 +94,8 @@ set(PROJECT_FILES src/main.cpp
     src/game/components/sprite.cpp
     src/game/components/camera.hpp
     src/game/components/camera.cpp
+    src/game/components/audio_source.hpp
+    src/game/components/audio_source.cpp
     src/game/systems/sprite_renderer.hpp
     src/game/systems/sprite_renderer.cpp
     src/game/systems/camera_renderer.hpp

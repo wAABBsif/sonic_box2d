@@ -9,18 +9,17 @@ namespace sb2d::audio
     {
         private:
             al_object al_id;
-            std::string clip;
+            bool is_active;
 
         public:
             source();
+            source(const source& s);
+            source (const source&& s);
             virtual ~source();
 
-            void play();
+            void play(al_object buffer);
             void stop();
             void pause();
-
-            void set_clip(const std::string& path);
-            std::string get_clip();
 
             void set_volume(const float value);
             float get_volume();

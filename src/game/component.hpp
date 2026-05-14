@@ -19,6 +19,7 @@ namespace sb2d::game
             COMPONENT_TRANSFORM,
             COMPONENT_SPRITE,
             COMPONENT_CAMERA,
+            COMPONENT_AUDIO_SOURCE,
             COMPONENT_COUNT
         };
 

@@ -6,26 +6,30 @@
 using namespace sb2d::audio;
 
 source::source()
+    : is_active(false)
 {
     alGenSources(1, &al_id);
 }
 
+source::source(const source& s)
+    : al_id(s.al_id), is_active(false)
+{}
+
+source::source(const source&& s)
+    : al_id(s.al_id), is_active(false)
+{}
+
 source::~source()
 {
-    alDeleteSources(1, &al_id);
+    if (is_active)
+        alDeleteSources(1, &al_id);
 }
 
-void source::play()
+void source::play(al_object buffer)
 {
-    auto c = clip::get(clip);
-    if (!c)
-    {
-        LOG_WARNING("Clip ", clip, " not loaded!");
-        return;
-    }
-
-    alSourcei(al_id, AL_BUFFER, c->get_al_id());
+    alSourcei(al_id, AL_BUFFER, buffer);
     alSourcePlay(al_id);
+    is_active = true;
 }
 
 void source::stop()
@@ -36,16 +40,6 @@ void source::stop()
 void source::pause()
 {
     alSourcePause(al_id);
-}
-
-void source::set_clip(const std::string& path)
-{
-    this->clip = path;
-}
-
-std::string source::get_clip()
-{
-    return this->clip;
 }
 
 void source::set_volume(const float value)
