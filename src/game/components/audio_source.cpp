@@ -27,8 +27,8 @@ void audio_source::update_debug_inspector()
 {
 #if defined (IS_DEBUG)
     ImGui::InputText("Clip", &this->clip);
-    ImGui::SliderFloat("Volume", &volume, 0, 2);
-    ImGui::SliderFloat("Pitch", &pitch, 0, 2);
+    ImGui::SliderFloat("Volume", &volume, 0, 1);
+    ImGui::SliderFloat("Pitch", &pitch, 0, 4);
     ImGui::Checkbox("Is Looping", &is_looping);
     if (ImGui::Button("Play"))
     {
@@ -68,8 +68,6 @@ void audio_source::play()
         return;
     }
 
-    source::set_volume(volume);
-    source::set_pitch(pitch);
     source::play(clip->get_al_id());
 }
 

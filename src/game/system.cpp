@@ -3,6 +3,7 @@
 
 #include "game/systems/sprite_renderer.hpp"
 #include "game/systems/camera_renderer.hpp"
+#include "game/systems/audio_source_manager.hpp"
 #include "game/systems/deletion.hpp"
 
 using namespace sb2d::game;
@@ -13,10 +14,12 @@ void system_base::init()
 {
     systems::sprite_renderer::init();
     systems::camera_renderer::init();
+    systems::audio_source_manager::init();
     systems::deletion::init();
 
     add_system(&systems::sprite_renderer::get());
     add_system(&systems::camera_renderer::get());
+    add_system(&systems::audio_source_manager::get());
     add_system(&systems::deletion::get());
 }
 

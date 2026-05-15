@@ -1,10 +1,11 @@
 #pragma once
+#include "game/systems/audio_source_manager.hpp"
 #include "game/component.hpp"
 #include "audio/source.hpp"
 
 namespace sb2d::game::components
 {
-    class audio_source : public component<audio_source>, audio::source
+    class audio_source : public component<audio_source>, protected audio::source
     {
     public:
         std::string clip;
@@ -24,5 +25,7 @@ namespace sb2d::game::components
         void play();
         void pause();
         void stop();
+
+        friend class sb2d::game::systems::audio_source_manager;
     };
 }

@@ -100,6 +100,8 @@ set(PROJECT_FILES src/main.cpp
     src/game/systems/sprite_renderer.cpp
     src/game/systems/camera_renderer.hpp
     src/game/systems/camera_renderer.cpp
+    src/game/systems/audio_source_manager.hpp
+    src/game/systems/audio_source_manager.cpp
     src/game/systems/deletion.hpp
     src/game/systems/deletion.cpp
 )
