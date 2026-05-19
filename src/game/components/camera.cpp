@@ -14,14 +14,24 @@ camera::camera(const glm::ivec2 texture_size, const color clear_color)
 {
 }
 
-constexpr component_base::type camera::get_type()
+constexpr component_base::type camera::s_get_type()
 {
     return COMPONENT_CAMERA;
 }
 
-constexpr std::string camera::get_name()
+constexpr std::string camera::s_get_name()
 {
     return "Camera";
+}
+
+constexpr component_base::type camera::get_type()
+{
+    return s_get_type();
+}
+
+constexpr std::string camera::get_name()
+{
+    return s_get_name();
 }
 
 void camera::update_debug_inspector()
@@ -41,11 +51,17 @@ framebuffer& camera::get_framebuffer()
 
 camera* camera::add(entity_id id, const glm::ivec2 texture_size, const color clear_color)
 {
-    enable_component(id, COMPONENT_CAMERA);
+    enable_component(id, s_get_type());
     camera* result = &get_all().insert({id, camera(texture_size, clear_color)}).first->second;
     if (camera::get(systems::camera_renderer::get_main_camera()) == nullptr)
     {
         systems::camera_renderer::set_main_camera(id);
     }
     return result;
+}
+
+void camera::remove(entity_id id)
+{
+    disable_component(id, s_get_type());
+    get_all().erase(id);
 }

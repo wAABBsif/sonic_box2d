@@ -15,8 +15,14 @@ namespace sb2d::game::components
 
         transform(glm::vec2 position = glm::vec2(0, 0), float rotation = 0, glm::vec2 scale = glm::vec2(1, 1));
 
+    private:
+        static constexpr type s_get_type();
+        static constexpr std::string s_get_name();
+    
+    public:
         constexpr type get_type() override;
         constexpr std::string get_name() override;
+
         void update_debug_inspector() override;
 
         static transform* add(entity_id id, glm::vec2 position = glm::vec2(0, 0), float rotation = 0, glm::vec2 scale = glm::vec2(1, 1));

@@ -15,8 +15,14 @@ namespace sb2d::game::components
     
         audio_source(const std::string& clip, float volume = 1, float pitch = 1, bool is_looping = false);
 
+    private:
+        static constexpr type s_get_type();
+        static constexpr std::string s_get_name();
+
+    public:
         constexpr type get_type() override;
         constexpr std::string get_name() override;
+        
         void update_debug_inspector() override;
 
         static audio_source* add(entity_id id, const std::string& clip, float volume = 1, float pitch = 1, bool is_looping = false);

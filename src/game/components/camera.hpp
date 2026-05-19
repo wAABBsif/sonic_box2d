@@ -16,8 +16,14 @@ namespace sb2d::game::components
 
             camera(const glm::ivec2 texture_size, const color clear_color);
 
+        private:
+            static constexpr type s_get_type();
+            static constexpr std::string s_get_name();
+
+        public:
             constexpr type get_type() override;
             constexpr std::string get_name() override;
+
             void update_debug_inspector() override;
 
             gfx::framebuffer& get_framebuffer();
