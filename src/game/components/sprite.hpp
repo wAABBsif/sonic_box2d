@@ -17,21 +17,17 @@ namespace sb2d::game::components
         color tint;
         int32_t depth;
 
-        sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0, color tint = color::white());
+        sprite(const std::string& texture = "", std::array<glm::ivec2, 2> texture_coords = {glm::ivec2(0, 0), glm::ivec2(0, 0)}, float depth = 0, color tint = color::white());
 
-    private:
-        static constexpr type s_get_type();
-        static constexpr std::string s_get_name();
-
-    public:
         constexpr type get_type() override;
         constexpr std::string get_name() override;
 
         void update_debug_inspector() override;
 
-        static sprite* add(entity_id id, const std::string& texture, std::array<glm::ivec2, 2> texture_coords, float depth = 0);
+        static sprite* add(entity_id id, const std::string& texture = "", std::array<glm::ivec2, 2> texture_coords = {glm::ivec2(0, 0), glm::ivec2(0, 0)}, float depth = 0);
         static void remove(entity_id id);
 
-        static constexpr int capacity = 1024;
+        static constexpr component::type type = COMPONENT_SPRITE;
+        static constexpr std::string name = "Sprite";
     };
 }

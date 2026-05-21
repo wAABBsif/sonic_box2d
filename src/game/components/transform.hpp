@@ -15,11 +15,6 @@ namespace sb2d::game::components
 
         transform(glm::vec2 position = glm::vec2(0, 0), float rotation = 0, glm::vec2 scale = glm::vec2(1, 1));
 
-    private:
-        static constexpr type s_get_type();
-        static constexpr std::string s_get_name();
-    
-    public:
         constexpr type get_type() override;
         constexpr std::string get_name() override;
 
@@ -30,5 +25,8 @@ namespace sb2d::game::components
 
         glm::mat3 local_to_world();
         glm::mat3 world_to_local();
+
+        static constexpr component::type type = COMPONENT_TRANSFORM;
+        static constexpr std::string name = "Transform";
     };
 }

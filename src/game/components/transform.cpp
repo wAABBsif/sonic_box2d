@@ -13,24 +13,14 @@ transform::transform(glm::vec2 position, float rotation, glm::vec2 scale)
     : position(position), rotation(rotation), scale(scale)
 {}
 
-constexpr component_base::type transform::s_get_type()
-{
-    return COMPONENT_TRANSFORM;
-}
-
-constexpr std::string transform::s_get_name()
-{
-    return "Transform";
-}
-
 constexpr component_base::type transform::get_type()
 {
-    return s_get_type();
+    return type;
 }
 
 constexpr std::string transform::get_name()
 {
-    return s_get_name();
+    return name;
 }
 
 void transform::update_debug_inspector()
@@ -44,13 +34,13 @@ void transform::update_debug_inspector()
 
 transform* transform::add(entity_id id, glm::vec2 position, float rotation, glm::vec2 scale)
 {
-    enable_component(id, s_get_type());
+    enable_component(id, type);
     return &get_all().insert({id, transform(position, rotation, scale)}).first->second;
 }
 
 void transform::remove(entity_id id)
 {
-    disable_component(id, s_get_type());
+    disable_component(id, type);
     get_all().erase(id);
 }
 

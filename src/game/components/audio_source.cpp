@@ -13,24 +13,14 @@ audio_source::audio_source(const std::string& clip, float volume, float pitch, b
     : clip(clip), volume(volume), pitch(pitch), is_looping(is_looping)
 {}
 
-constexpr component_base::type audio_source::s_get_type()
-{
-    return COMPONENT_AUDIO_SOURCE;
-}
-
-constexpr std::string audio_source::s_get_name()
-{
-    return "Audio Source";
-}
-
 constexpr component_base::type audio_source::get_type()
 {
-    return s_get_type();
+    return type;
 }
 
 constexpr std::string audio_source::get_name()
 {
-    return s_get_name();
+    return name;
 }
 
 void audio_source::update_debug_inspector()
@@ -56,13 +46,13 @@ void audio_source::update_debug_inspector()
 
 audio_source* audio_source::add(entity_id id, const std::string& clip, float volume, float pitch, bool is_looping)
 {
-    enable_component(id, s_get_type());
+    enable_component(id, type);
     return &get_all().insert({id, audio_source(clip, volume, pitch, is_looping)}).first->second;
 }
 
 void audio_source::remove(entity_id id)
 {
-    disable_component(id, s_get_type());
+    disable_component(id, type);
     get_all().erase(id);
 }
 

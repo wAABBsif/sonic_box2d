@@ -12,24 +12,14 @@ sprite::sprite(const std::string& texture, std::array<glm::ivec2, 2> texture_coo
     : texture(texture), texture_coords(texture_coords), depth(depth), tint(tint) 
 {}
 
-constexpr component_base::type sprite::s_get_type()
-{
-    return COMPONENT_SPRITE;
-}
-
-constexpr std::string sprite::s_get_name()
-{
-    return "Sprite";
-}
-
 constexpr component_base::type sprite::get_type()
 {
-    return s_get_type();
+    return type;
 }
 
 constexpr std::string sprite::get_name()
 {
-    return s_get_name();
+    return name;
 }
 
 void sprite::update_debug_inspector()
@@ -45,12 +35,12 @@ void sprite::update_debug_inspector()
 
 sprite* sprite::add(entity_id id, const std::string &texture, std::array<glm::ivec2, 2> texture_coords, float depth)
 {
-    enable_component(id, s_get_type());
+    enable_component(id, type);
     return &get_all().insert({id, sprite(texture, texture_coords, depth)}).first->second;
 }
 
 void sprite::remove(entity_id id)
 {
-    disable_component(id, s_get_type());
+    disable_component(id, type);
     get_all().erase(id);
 }
