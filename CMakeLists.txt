@@ -80,6 +80,8 @@ set(PROJECT_FILES src/main.cpp
     src/audio/clip.cpp
     src/audio/source.hpp
     src/audio/source.cpp
+    src/input/keyboard.hpp
+    src/input/keyboard.cpp
     src/game/game.hpp
     src/game/game.cpp
     src/game/entity.hpp
