@@ -5,9 +5,24 @@
 #include "imgui.h"
 #include <memory>
 #include "game/component.hpp"
+#include "game/components/transform.hpp"
+#include "game/components/sprite.hpp"
+#include "game/components/camera.hpp"
+#include "game/components/audio_source.hpp"
 
 using namespace sb2d::game;
 using namespace sb2d::debug_ui;
+
+#define SELECTABLE_COMPONENT_TYPE(type)                     \
+({                                                          \
+    if (type::get(id) == nullptr)                           \
+    {                                                       \
+        if (ImGui::Selectable(type::name.c_str()))  \
+        {                                                   \
+            type::add(id);                                  \
+        }                                                   \
+    }                                                       \
+})
 
 void components_window::update()
 {
@@ -31,6 +46,15 @@ void components_window::update()
         {
             component->update_debug_inspector();
         }
+    }
+    ImGui::Separator();
+    if (ImGui::BeginCombo("Add", "Select type..."))
+    {
+        SELECTABLE_COMPONENT_TYPE(components::transform);
+        SELECTABLE_COMPONENT_TYPE(components::sprite);
+        SELECTABLE_COMPONENT_TYPE(components::camera);
+        SELECTABLE_COMPONENT_TYPE(components::audio_source);
+        ImGui::EndCombo();
     }
     ImGui::End();
 #endif
