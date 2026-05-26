@@ -31,6 +31,17 @@ void camera::update_debug_inspector()
     glm::ivec2 size = get_framebuffer().get_size();
     ImGui::DragInt2("Viewport Size", glm::value_ptr(size));
     get_framebuffer().resize(size);
+    if (ImGui::Button("Remove"))
+    {
+        for (auto& c : get_all())
+        {
+            if (&c.second == this)
+            {
+                remove(c.first);
+                return;
+            }
+        }
+    }
 #endif
 }
 

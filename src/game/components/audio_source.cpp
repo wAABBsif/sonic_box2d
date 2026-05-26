@@ -41,6 +41,18 @@ void audio_source::update_debug_inspector()
     ImGui::SameLine();
     if (ImGui::Button("Stop"))
         stop();
+
+    if (ImGui::Button("Remove"))
+    {
+        for (auto& c : get_all())
+        {
+            if (&c.second == this)
+            {
+                remove(c.first);
+                return;
+            }
+        }
+    }
 #endif
 }
 
