@@ -26,8 +26,9 @@ constexpr std::string audio_source::get_name()
 void audio_source::update_debug_inspector()
 {
 #if defined (IS_DEBUG)
-    if (ImGui::InputText("Clip", &this->clip))
+    if (ImGui::InputText("Clip", &this->clip, ImGuiInputTextFlags_EnterReturnsTrue))
         clip::load(this->clip);
+
     ImGui::SliderFloat("Volume", &volume, 0, 1);
     ImGui::SliderFloat("Pitch", &pitch, 0, 4);
     ImGui::Checkbox("Is Looping", &is_looping);
