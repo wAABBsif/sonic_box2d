@@ -42,7 +42,7 @@ void audio_source::update_debug_inspector()
     if (ImGui::Button("Stop"))
         stop();
 
-    if (ImGui::Button("Remove"))
+    if (ImGui::Button("Remove##audio_source"))
     {
         for (auto& c : get_all())
         {

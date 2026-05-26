@@ -29,7 +29,7 @@ void transform::update_debug_inspector()
     ImGui::DragFloat2("Position", reinterpret_cast<float*>(&this->position), 0.1f);
     ImGui::DragFloat("Rotation", &this->rotation, 0.01f);
     ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&this->scale), 0.01f);
-    if (ImGui::Button("Remove"))
+    if (ImGui::Button("Remove##transform"))
     {
         for (auto& c : get_all())
         {

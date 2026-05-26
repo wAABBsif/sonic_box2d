@@ -30,7 +30,7 @@ void sprite::update_debug_inspector()
     ImGui::DragInt2("", reinterpret_cast<int*>(&texture_coords[1]), 1, 0, 65536);
     ImGui::ColorEdit4("Tint", this->tint.data());
     ImGui::DragInt("Depth", &this->depth, 1, 0, 0);
-    if (ImGui::Button("Remove"))
+    if (ImGui::Button("Remove##sprite"))
     {
         for (auto& c : get_all())
         {
