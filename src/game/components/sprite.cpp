@@ -25,7 +25,9 @@ constexpr std::string sprite::get_name()
 void sprite::update_debug_inspector()
 {
 #if defined (IS_DEBUG)
-    ImGui::InputText("Texture", &this->texture);
+    if (ImGui::InputText("Texture", &this->texture))
+        texture::load(this->texture);
+
     ImGui::DragInt2("Texture Coords", reinterpret_cast<int*>(&texture_coords[0]), 1, 0, 65536);
     ImGui::DragInt2("", reinterpret_cast<int*>(&texture_coords[1]), 1, 0, 65536);
     ImGui::ColorEdit4("Tint", this->tint.data());
