@@ -3,6 +3,7 @@
 #include "core/time.hpp"
 #include "game/entity.hpp"
 #include "imgui.h"
+#include "imgui/misc/cpp/imgui_stdlib.h"
 #include <memory>
 #include "game/component.hpp"
 #include "game/components/transform.hpp"
@@ -36,6 +37,11 @@ void components_window::update()
         ImGui::End();
         return;
     }
+
+    const std::string s = entity->name;
+    ImGui::InputText("Name", &entity->name);
+    if (entity->name.empty())
+        entity->name = s;
 
     for (int i = 0; i < component_base::COMPONENT_COUNT; i++)
     {
