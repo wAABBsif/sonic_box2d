@@ -25,7 +25,7 @@ texture::texture(const std::string &path)
         return;
     }
 
-    glGenBuffers(1, &this->gl_id);
+    glGenTextures(1, &this->gl_id);
     glBindTexture(GL_TEXTURE_2D, this->gl_id);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->size.x, this->size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
     
