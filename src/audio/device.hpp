@@ -1,3 +1,4 @@
+#pragma once
 #include "audio.hpp"
 #include "AL/alc.h"
 

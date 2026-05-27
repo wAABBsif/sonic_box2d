@@ -44,7 +44,6 @@ static void s_init()
 #else
     LOG_MESSAGE("Build mode: Release");
 #endif
-
     sdl_interface::init();
     time::init();
     s_window = new gfx::sdl_window("Sonic Box2D", glm::ivec2(640, 480));
@@ -89,4 +88,14 @@ static bool s_is_running()
 gfx::window& game::get_main_window()
 {
     return *s_window;
+}
+
+audio::device& game::get_audio_device()
+{
+    return *s_audio_device;
+}
+
+phys::world& game::get_world()
+{
+    return *s_world;
 }
