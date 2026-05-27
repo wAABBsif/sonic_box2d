@@ -24,7 +24,7 @@ void camera_renderer::iterate(std::map<entity_id, entity>::iterator& it)
     components::camera& camera = *components::camera::get(it->first);
 
     transform.scale.x = transform.scale.y * camera.get_framebuffer().get_size().x / camera.get_framebuffer().get_size().y;
-    win.render_to_framebuffer(camera.get_framebuffer(), camera.clear_color, transform.world_to_local());
+    win.render_to_framebuffer(camera.get_framebuffer(), camera.clear_color, transform.world_to_local() * 2.0f);
 }
 
 void camera_renderer::init()
