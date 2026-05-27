@@ -1,5 +1,1 @@
-implement input
-implement keyboard input
-implement gamepad input
-
 implement physics (to be expanded)

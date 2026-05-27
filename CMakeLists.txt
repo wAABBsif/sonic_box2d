@@ -56,6 +56,10 @@ set(PROJECT_FILES src/main.cpp
     src/debug/entities_window.cpp
     src/debug/components_window.hpp
     src/debug/components_window.cpp
+    src/phys/phys.hpp
+    src/phys/phys.cpp
+    src/phys/world.hpp
+    src/phys/world.cpp
     src/gfx/gfx.hpp
     src/gfx/gfx.cpp
     src/gfx/window.hpp
