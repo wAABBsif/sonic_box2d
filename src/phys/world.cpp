@@ -9,7 +9,7 @@ world::world(const float step_time, const int substep_count, const glm::vec2 gra
     : step_time(step_time), substep_count(substep_count), accumulator(0)
 {
     b2WorldDef def = b2DefaultWorldDef();
-    def.gravity = b2Vec2(gravity.x, gravity.y);
+    def.gravity = b2_from_glm(gravity);
 
     this->id = b2CreateWorld(&def);
 }
@@ -26,4 +26,9 @@ void world::update()
         accumulator -= step_time;
         b2World_Step(id, step_time, substep_count);
     }
+}
+
+b2WorldId world::get_box2d_id() const
+{
+    return this->id;
 }

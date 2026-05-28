@@ -60,6 +60,8 @@ set(PROJECT_FILES src/main.cpp
     src/phys/phys.cpp
     src/phys/world.hpp
     src/phys/world.cpp
+	src/phys/body.hpp
+	src/phys/body.cpp
     src/gfx/gfx.hpp
     src/gfx/gfx.cpp
     src/gfx/window.hpp
