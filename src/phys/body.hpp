@@ -11,7 +11,7 @@ namespace sb2d::phys
 	{
 	private:
 		b2BodyId id;
-	protected:
+	public:
 		enum class body_type : uint8_t
 		{
 			STATIC_BODY,
@@ -19,6 +19,7 @@ namespace sb2d::phys
 			DYNAMIC_BODY
 		};
 
+	protected:
 		explicit body(body_type type = body_type::STATIC_BODY, glm::vec2 position = glm::vec2(0, 0), float angle = 0);
 		virtual ~body();
 

@@ -112,6 +112,8 @@ set(PROJECT_FILES src/main.cpp
     src/game/systems/audio_source_manager.cpp
     src/game/systems/deletion.hpp
     src/game/systems/deletion.cpp
+		src/phys/collision_shape.cpp
+		src/phys/collision_shape.hpp
 )
 
 add_executable(${PROJECT_NAME}
