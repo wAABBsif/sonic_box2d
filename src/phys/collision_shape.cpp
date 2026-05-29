@@ -5,46 +5,24 @@
 
 using namespace sb2d::phys;
 
-collision_shape::collision_shape(const float density, const float friction, const float bounce)
-	: def(b2DefaultShapeDef()), id(b2_nullShapeId)
+collision_shape::collision_shape(const float density, const float friction, const float bounce, const shape_type type)
+	: density(density), friction(friction), bounce(bounce), type(type)
+{}
+
+collision_shape::collision_shape(const float density, const float friction, const float bounce, const box_def box)
+    : collision_shape(density, friction, bounce, shape_type::BOX)
 {
-	def.density = density;
-	def.material.friction = friction;
-	def.material.restitution = bounce;
+    this->box = box; 
 }
 
-collision_shape::~collision_shape()
+collision_shape::collision_shape(const float density, const float friction, const float bounce, const circle_def circle)
+    : collision_shape(density, friction, bounce, shape_type::CIRCLE)
 {
-	b2DestroyShape(id, true);
+    this->circle = circle;
 }
 
-collision_shape::shape_type collision_shape::get_shape_type() const
+collision_shape::collision_shape(const float density, const float friction, const float bounce, const capsule_def capsule)
+    : collision_shape(density, friction, bounce, shape_type::CAPSULE)
 {
-	b2ShapeType b2_type = b2Shape_GetType(id);
-	switch (b2_type)
-	{
-		case b2_polygonShape:
-			return b2Shape_GetPolygon(id).count == 4 ? shape_type::BOX : shape_type::INVALID;
-		case b2_circleShape:
-			return shape_type::CIRCLE;
-		case b2_capsuleShape:
-			return shape_type::CAPSULE;
-		default:
-			return shape_type::INVALID;
-	}
-}
-
-float collision_shape::get_density() const
-{
-	return b2Shape_GetDensity(id);
-}
-
-float collision_shape::get_friction() const
-{
-	return b2Shape_GetSurfaceMaterial(id).friction;
-}
-
-float collision_shape::get_bounce() const
-{
-	return b2Shape_GetSurfaceMaterial(id).restitution;
+    this->capsule = capsule;
 }

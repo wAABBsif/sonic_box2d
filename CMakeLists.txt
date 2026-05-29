@@ -64,13 +64,6 @@ set(PROJECT_FILES src/main.cpp
 	src/phys/body.cpp
 	src/phys/collision_shape.hpp
 	src/phys/collision_shape.cpp
-    src/phys/collision_shapes/collision_box.hpp
-    src/phys/collision_shapes/collision_box.cpp
-    src/phys/collision_shapes/collision_circle.hpp
-    src/phys/collision_shapes/collision_circle.cpp
-    src/phys/collision_shapes/collision_capsule.hpp
-    src/phys/collision_shapes/collision_capsule.cpp
-    src/gfx/gfx.hpp
     src/gfx/gfx.cpp
     src/gfx/window.hpp
     src/gfx/window.cpp

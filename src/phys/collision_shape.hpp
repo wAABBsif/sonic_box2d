@@ -1,31 +1,57 @@
 #pragma once
 #include "box2d/id.h"
 #include "box2d/types.h"
+#include "body.hpp"
 
 namespace sb2d::phys
 {
 	class collision_shape
 	{
 	public:
-		enum class shape_type
+		enum class shape_type : uint8_t
 		{
 			INVALID,
 			BOX,
 			CIRCLE,
 			CAPSULE
-		};
+		} type;
 
-	protected:
-		b2ShapeDef def;
-		b2ShapeId id;
+        float density;
+        float friction;
+        float bounce;
+        
+        struct box_def
+        {
+            glm::vec2 center;
+            float rotation;
+            glm::vec2 radius;
+        };
 
-		collision_shape(float density, float friction, float bounce);
-	public:
-		~collision_shape();
+        struct circle_def
+        {
+            glm::vec2 center;
+            float radius;
+        };
 
-		shape_type get_shape_type() const;
-		float get_density() const;
-		float get_friction() const;
-		float get_bounce() const;
+        struct capsule_def
+        {
+            glm::vec2 center1;
+            glm::vec2 center2;
+            float radius;
+        };
+
+        union
+        {
+            box_def box;
+            circle_def circle;
+            capsule_def capsule;
+        };
+
+
+    public:
+		collision_shape(float density, float friction, float bounce, shape_type type = shape_type::INVALID);
+		collision_shape(float density, float friction, float bounce, box_def box);
+		collision_shape(float density, float friction, float bounce, circle_def circle);
+		collision_shape(float density, float friction, float bounce, capsule_def capsule);
 	};
 }
