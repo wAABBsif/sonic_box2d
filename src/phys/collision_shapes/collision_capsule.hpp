@@ -10,6 +10,6 @@ namespace sb2d::phys
     protected:
         b2Capsule capsule;
     public:
-        collision_capsule(const float density, const float friction, const float bounce, const float radius, const glm::vec2 center1, const glm::vec2 center2);
+        collision_capsule(const float density, const float friction, const float bounce, const float radius, const glm::vec2 center1 = glm::vec2(0, -0.5f), const glm::vec2 center2 = glm::vec2(0, 0.5f));
     };
 }

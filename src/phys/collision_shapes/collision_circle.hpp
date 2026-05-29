@@ -9,6 +9,6 @@ namespace sb2d::phys
     protected:
         b2Circle circle;
     public:
-        collision_circle(const float density, const float friction, const float bounce, const float radius, const glm::vec2 center);
+        collision_circle(const float density, const float friction, const float bounce, const float radius, const glm::vec2 center = glm::vec2(0));
     };
 }
