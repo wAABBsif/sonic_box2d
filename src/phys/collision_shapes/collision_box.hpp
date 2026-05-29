@@ -9,6 +9,6 @@ namespace sb2d::phys
 	protected:
 		b2Polygon box;
 	public:
-		collision_box(glm::vec2 radius, float density, float friction, float bounce, glm::vec2 center = glm::vec2(0.0f), float rotation = 0);
+		collision_box(float density, float friction, float bounce, glm::vec2 radius, glm::vec2 center = glm::vec2(0.0f), float rotation = 0);
 	};
 }

@@ -62,8 +62,12 @@ set(PROJECT_FILES src/main.cpp
     src/phys/world.cpp
 	src/phys/body.hpp
 	src/phys/body.cpp
-	src/phys/collision_shape.cpp
 	src/phys/collision_shape.hpp
+	src/phys/collision_shape.cpp
+    src/phys/collision_shapes/collision_box.hpp
+    src/phys/collision_shapes/collision_box.cpp
+    src/phys/collision_shapes/collision_circle.hpp
+    src/phys/collision_shapes/collision_circle.cpp
     src/gfx/gfx.hpp
     src/gfx/gfx.cpp
     src/gfx/window.hpp
@@ -114,8 +118,6 @@ set(PROJECT_FILES src/main.cpp
     src/game/systems/audio_source_manager.cpp
     src/game/systems/deletion.hpp
     src/game/systems/deletion.cpp
-		src/phys/collision_shapes/collision_box.cpp
-		src/phys/collision_shapes/collision_box.hpp
 )
 
 add_executable(${PROJECT_NAME}
