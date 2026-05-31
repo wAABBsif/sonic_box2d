@@ -4,6 +4,7 @@
 
 #include "box2d/id.h"
 #include "glm/vec2.hpp"
+#include "phys/collision_shape.hpp"
 
 namespace sb2d::phys
 {
@@ -36,5 +37,10 @@ namespace sb2d::phys
 		void apply_torque(float torque) const;
 		void apply_impulse(glm::vec2 impulse, glm::vec2 point = glm::vec2(NAN, NAN)) const;
 		void apply_angular_impulse(float impulse) const;
+
+        int get_shape_count();
+        void get_shapes(collision_shape* shapes, int count = -1);
+        void add_shape(collision_shape shape);
+        void set_shape(collision_shape shape, int idx);
 	};
 }

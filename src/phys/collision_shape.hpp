@@ -1,7 +1,7 @@
 #pragma once
 #include "box2d/id.h"
 #include "box2d/types.h"
-#include "body.hpp"
+#include "glm/glm.hpp"
 
 namespace sb2d::phys
 {
@@ -23,7 +23,6 @@ namespace sb2d::phys
         struct box_def
         {
             glm::vec2 center;
-            float rotation;
             glm::vec2 radius;
         };
 

@@ -3,6 +3,8 @@
 #include "box2d/box2d.h"
 #include "box2d/types.h"
 #include "game/game.hpp"
+#include "phys/collision_shape.hpp"
+#include "phys/phys.hpp"
 
 using namespace sb2d::phys;
 
@@ -95,4 +97,120 @@ void body::apply_impulse(const glm::vec2 impulse, const glm::vec2 point) const
 void body::apply_angular_impulse(const float impulse) const
 {
 	b2Body_ApplyAngularImpulse(id, impulse, true);
+}
+
+int body::get_shape_count()
+{
+    return b2Body_GetShapeCount(id);
+}
+
+void body::get_shapes(collision_shape* shapes, int count)
+{
+    if (count < 0)
+        count = get_shape_count();
+    b2ShapeId* shape_ids = new b2ShapeId[count];
+    b2Body_GetShapes(id, shape_ids, count);
+    for (int i = 0; i < count; i++)
+    {
+        b2SurfaceMaterial mat = b2Shape_GetSurfaceMaterial(shape_ids[i]);
+        shapes[i].density = b2Shape_GetDensity(shape_ids[i]);
+        shapes[i].friction = mat.friction;
+        shapes[i].bounce = mat.restitution;
+        
+        switch (b2Shape_GetType(shape_ids[i]))
+        {
+            case b2_polygonShape:
+            {
+                b2Polygon poly = b2Shape_GetPolygon(shape_ids[i]);
+                shapes[i].box.center = glm_from_b2(poly.centroid);
+                shapes[i].box.radius = glm_from_b2(poly.vertices[2]);
+                break;
+            }
+            case b2_circleShape:
+            {
+                b2Circle circ = b2Shape_GetCircle(shape_ids[i]);
+                shapes[i].circle.center = glm_from_b2(circ.center);
+                shapes[i].circle.radius = circ.radius;
+                break;
+            }
+            case b2_capsuleShape:
+            {
+                b2Capsule caps = b2Shape_GetCapsule(shape_ids[i]);
+                shapes[i].capsule.center1 = glm_from_b2(caps.center1);
+                shapes[i].capsule.center2 = glm_from_b2(caps.center2);
+                shapes[i].capsule.radius = caps.radius;
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+void body::add_shape(collision_shape shape)
+{
+    b2ShapeDef shape_def = b2DefaultShapeDef();
+    shape_def.density = shape.density;
+    shape_def.material.friction = shape.friction;
+    shape_def.material.restitution = shape.bounce;
+
+    switch (shape.type)
+    {
+        case collision_shape::shape_type::BOX:
+        {
+            b2Polygon box = b2MakeOffsetBox(shape.box.radius.x, shape.box.radius.y, b2_from_glm(shape.box.center), b2MakeRot(0));
+            b2CreatePolygonShape(id, &shape_def, &box);
+            break;
+        }
+        case collision_shape::shape_type::CIRCLE:
+        {
+            b2Circle circle = (b2Circle){b2_from_glm(shape.circle.center), shape.circle.radius};
+            b2CreateCircleShape(id, &shape_def, &circle);
+            break;
+        }
+        case collision_shape::shape_type::CAPSULE:
+        {
+            b2Capsule capsule = (b2Capsule){b2_from_glm(shape.capsule.center1), b2_from_glm(shape.capsule.center2), shape.capsule.radius};
+            b2CreateCapsuleShape(id, &shape_def, &capsule);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void body::set_shape(collision_shape shape, int idx)
+{
+    b2ShapeId* shape_ids = new b2ShapeId[idx + 1];
+    b2Body_GetShapes(id, shape_ids, idx + 1);
+    b2ShapeId& shape_id = shape_ids[idx];
+
+    b2SurfaceMaterial mat = b2DefaultSurfaceMaterial();
+    mat.friction = shape.friction;
+    mat.restitution = shape.bounce;
+    b2Shape_SetDensity(shape_id, shape.density, true);
+    b2Shape_SetSurfaceMaterial(shape_id, &mat); 
+    switch (shape.type)
+    {
+        case collision_shape::shape_type::BOX:
+        {
+            b2Polygon box = b2MakeOffsetBox(shape.box.radius.x, shape.box.radius.y, b2_from_glm(shape.box.center), b2MakeRot(0));
+            b2Shape_SetPolygon(shape_id, &box);
+            break;
+        }
+        case collision_shape::shape_type::CIRCLE:
+        {
+            b2Circle circle = (b2Circle){b2_from_glm(shape.circle.center), shape.circle.radius};
+            b2Shape_SetCircle(shape_id, &circle);
+            break;
+        }
+        case collision_shape::shape_type::CAPSULE:
+        {
+            b2Capsule capsule = (b2Capsule){b2_from_glm(shape.capsule.center1), b2_from_glm(shape.capsule.center2), shape.capsule.radius};
+            b2Shape_SetCapsule(shape_id, &capsule);
+            break;
+        }
+        default:
+            break;
+    }
 }
