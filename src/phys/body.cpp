@@ -24,6 +24,7 @@ static b2BodyType s_b2_type_from_body_type(body::body_type type)
 }
 
 body::body(const body_type type, const glm::vec2 position, const float angle)
+    : is_active(false)
 {
 	b2BodyDef def = b2DefaultBodyDef();
 	def.type = s_b2_type_from_body_type(type);
@@ -33,9 +34,18 @@ body::body(const body_type type, const glm::vec2 position, const float angle)
 	id = b2CreateBody(game::get_world().get_box2d_id(), &def);
 }
 
+body::body(const body& b)
+    : id(b.id), is_active(false)
+{}
+
+body::body(const body&& b)
+    : id(b.id), is_active(false)
+{}
+
 body::~body()
 {
-	b2DestroyBody(id);
+    if (is_active)
+	    b2DestroyBody(id);
 }
 
 body::body_type body::get_body_type()
@@ -231,6 +241,15 @@ void body::add_shape(collision_shape shape)
         default:
             break;
     }
+}
+
+void body::remove_shape(int idx)
+{
+    b2ShapeId* shape_ids = new b2ShapeId[idx + 1];
+    b2Body_GetShapes(id, shape_ids, idx + 1);
+    b2ShapeId& shape_id = shape_ids[idx];
+
+    b2DestroyShape(shape_id, true);
 }
 
 void body::set_shape(collision_shape shape, int idx)

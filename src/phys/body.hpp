@@ -13,6 +13,8 @@ namespace sb2d::phys
 	{
 	private:
 		b2BodyId id;
+    protected:
+        bool is_active;
 	public:
 		enum class body_type : uint8_t
 		{
@@ -23,6 +25,8 @@ namespace sb2d::phys
 		};
 
 		explicit body(body_type type = body_type::STATIC_BODY, glm::vec2 position = glm::vec2(0, 0), float angle = 0);
+        body(const body& b);
+        body(const body&& b);
 		virtual ~body();
 
         body_type get_body_type();
@@ -46,6 +50,7 @@ namespace sb2d::phys
         int get_shape_count();
         void get_shapes(collision_shape* shapes, int count = -1);
         void add_shape(collision_shape shape);
+        void remove_shape(int idx);
         void set_shape(collision_shape shape, int idx);
 	};
 }
