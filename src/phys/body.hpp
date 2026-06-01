@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <math.h>
+#include <string>
 
 #include "box2d/id.h"
 #include "glm/vec2.hpp"
@@ -15,14 +16,18 @@ namespace sb2d::phys
 	public:
 		enum class body_type : uint8_t
 		{
+            INVALID_BODY,
 			STATIC_BODY,
 			KINEMATIC_BODY,
 			DYNAMIC_BODY
 		};
 
-	protected:
 		explicit body(body_type type = body_type::STATIC_BODY, glm::vec2 position = glm::vec2(0, 0), float angle = 0);
 		virtual ~body();
+
+        body_type get_body_type();
+        void set_body_type(const body_type value);
+        std::string get_body_type_as_string(body_type b = body_type::INVALID_BODY);
 
 		glm::vec2 get_position() const;
 		float get_rotation() const;

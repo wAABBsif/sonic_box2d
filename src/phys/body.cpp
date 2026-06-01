@@ -38,6 +38,60 @@ body::~body()
 	b2DestroyBody(id);
 }
 
+body::body_type body::get_body_type()
+{
+    switch (b2Body_GetType(id))
+    {
+        case b2_staticBody:
+            return body_type::STATIC_BODY;
+        case b2_kinematicBody:
+            return body_type::KINEMATIC_BODY;
+        case b2_dynamicBody:
+            return body_type::DYNAMIC_BODY;
+        default:
+            return body_type::STATIC_BODY;
+    }
+}
+
+void body::set_body_type(const body::body_type value)
+{
+    b2BodyType body_type;
+    switch (value)
+    {
+        case body_type::STATIC_BODY:
+            body_type = b2_staticBody;
+            break;
+        case body_type::KINEMATIC_BODY:
+            body_type = b2_kinematicBody;
+            break;
+        case body_type::DYNAMIC_BODY:
+            body_type = b2_dynamicBody;
+            break;
+        default:
+            return;
+    }
+
+    b2Body_SetType(id, body_type);
+}
+
+std::string body::get_body_type_as_string(body_type type)
+{
+    if (type == body_type::INVALID_BODY)
+        type = get_body_type();
+
+    switch (type)
+    {
+        case body_type::STATIC_BODY:
+            return "Static";
+        case body_type::KINEMATIC_BODY:
+            return "Kinematic";
+        case body_type::DYNAMIC_BODY:
+            return "Dynamic";
+        default:
+            return "Invalid";
+    }
+}
+
 glm::vec2 body::get_position() const
 {
 	return glm_from_b2(b2Body_GetPosition(id));
