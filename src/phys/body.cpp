@@ -185,13 +185,15 @@ void body::get_shapes(collision_shape* shapes, int count)
         {
             case b2_polygonShape:
             {
+                shapes[i].type = collision_shape::shape_type::BOX;
                 b2Polygon poly = b2Shape_GetPolygon(shape_ids[i]);
                 shapes[i].box.center = glm_from_b2(poly.centroid);
                 shapes[i].box.radius = glm_from_b2(poly.vertices[2]);
                 break;
             }
             case b2_circleShape:
-            {
+            { 
+                shapes[i].type = collision_shape::shape_type::CIRCLE;
                 b2Circle circ = b2Shape_GetCircle(shape_ids[i]);
                 shapes[i].circle.center = glm_from_b2(circ.center);
                 shapes[i].circle.radius = circ.radius;
@@ -199,6 +201,7 @@ void body::get_shapes(collision_shape* shapes, int count)
             }
             case b2_capsuleShape:
             {
+                shapes[i].type = collision_shape::shape_type::CAPSULE;
                 b2Capsule caps = b2Shape_GetCapsule(shape_ids[i]);
                 shapes[i].capsule.center1 = glm_from_b2(caps.center1);
                 shapes[i].capsule.center2 = glm_from_b2(caps.center2);
