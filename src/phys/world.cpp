@@ -2,6 +2,7 @@
 #include "box2d/box2d.h"
 #include "box2d/math_functions.h"
 #include "box2d/types.h"
+#include "core/time.hpp"
 
 using namespace sb2d::phys;
 
@@ -21,6 +22,7 @@ world::~world()
 
 void world::update()
 {
+    accumulator += sb2d::time::get_delta();
     while (accumulator >= step_time)
     {
         accumulator -= step_time;
