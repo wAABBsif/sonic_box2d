@@ -188,7 +188,7 @@ void body::get_shapes(collision_shape* shapes, int count)
                 shapes[i].type = collision_shape::shape_type::BOX;
                 b2Polygon poly = b2Shape_GetPolygon(shape_ids[i]);
                 shapes[i].box.center = glm_from_b2(poly.centroid);
-                shapes[i].box.radius = glm_from_b2(poly.vertices[2]);
+                shapes[i].box.radius = glm_from_b2(poly.vertices[2]) - shapes[i].box.center;
                 break;
             }
             case b2_circleShape:

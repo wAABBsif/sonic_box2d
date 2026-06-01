@@ -10,6 +10,7 @@
 #include "game/components/sprite.hpp"
 #include "game/components/camera.hpp"
 #include "game/components/audio_source.hpp"
+#include "game/components/rigidbody.hpp"
 
 using namespace sb2d::game;
 using namespace sb2d::debug_ui;
@@ -60,6 +61,7 @@ void components_window::update()
         SELECTABLE_COMPONENT_TYPE(components::sprite);
         SELECTABLE_COMPONENT_TYPE(components::camera);
         SELECTABLE_COMPONENT_TYPE(components::audio_source);
+        SELECTABLE_COMPONENT_TYPE(components::rigidbody);
         ImGui::EndCombo();
     }
     ImGui::End();

@@ -4,6 +4,7 @@
 #include "components/sprite.hpp"
 #include "game/components/audio_source.hpp"
 #include "game/components/camera.hpp"
+#include "game/components/rigidbody.hpp"
 
 using namespace sb2d::game;
 
@@ -19,6 +20,8 @@ component_base* component_base::get(type type, entity_id id)
         return components::camera::get(id);
     case type::COMPONENT_AUDIO_SOURCE:
         return components::audio_source::get(id);
+    case type::COMPONENT_RIGIDBODY:
+        return components::rigidbody::get(id);
     default:
         return nullptr;
     }
