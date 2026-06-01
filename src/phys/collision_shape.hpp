@@ -48,6 +48,7 @@ namespace sb2d::phys
 
 
     public:
+        collision_shape() = default;
 		collision_shape(float density, float friction, float bounce, shape_type type = shape_type::INVALID);
 		collision_shape(float density, float friction, float bounce, box_def box);
 		collision_shape(float density, float friction, float bounce, circle_def circle);

@@ -5,7 +5,7 @@
 #include "game/game.hpp"
 #include "phys/collision_shape.hpp"
 #include "phys/phys.hpp"
-
+#include "core/log.hpp"
 using namespace sb2d::phys;
 
 static b2BodyType s_b2_type_from_body_type(body::body_type type)
@@ -209,6 +209,8 @@ void body::get_shapes(collision_shape* shapes, int count)
                 break;
         }
     }
+
+    delete[] shape_ids;
 }
 
 void body::add_shape(collision_shape shape)
@@ -250,6 +252,7 @@ void body::remove_shape(int idx)
     b2ShapeId& shape_id = shape_ids[idx];
 
     b2DestroyShape(shape_id, true);
+    delete[] shape_ids;
 }
 
 void body::set_shape(collision_shape shape, int idx)
@@ -286,4 +289,6 @@ void body::set_shape(collision_shape shape, int idx)
         default:
             break;
     }
+
+    delete[] shape_ids;
 }
